@@ -19,8 +19,8 @@ public class OrderDetails {
 	private String id_order;
 	@Column(name = "quantity")
 	private long quantity;
-	@Column(name = "giaban")
-	private long giaban;
+	@Column(name = "price")
+	private long price;
 
 	@Column(name = "anh")
 	private String anh;
@@ -31,14 +31,14 @@ public class OrderDetails {
 	public OrderDetails() {
 		super();
 	}
-	public OrderDetails(long id_detail_order, long id, String id_order, long quantity, long giaban, String anh,
+	public OrderDetails(long id_detail_order, long id, String id_order, long quantity, long price, String anh,
 			String ten, String mau) {
 		super();
 		this.id_detail_order = id_detail_order;
 		this.id = id;
 		this.id_order = id_order;
 		this.quantity = quantity;
-		this.giaban = giaban;
+		this.price = price;
 		this.anh = anh;
 		this.ten = ten;
 		this.mau = mau;
@@ -67,11 +67,11 @@ public class OrderDetails {
 	public void setQuantity(long quantity) {
 		this.quantity = quantity;
 	}
-	public long getGiaban() {
-		return giaban;
+	public long getPrice() {
+		return price;
 	}
-	public void setGiaban(long giaban) {
-		this.giaban = giaban;
+	public void setPrice(long price) {
+		this.price = price;
 	}
 	public String getAnh() {
 		return anh;
@@ -91,7 +91,6 @@ public class OrderDetails {
 	public void setMau(String mau) {
 		this.mau = mau;
 	}
-
-
+	
 
 }

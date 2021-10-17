@@ -21,6 +21,7 @@ import AddProducts from './admin/products/AddProducts';
 import OrderAdmin from './admin/orderadmin/OrderAdmin';
 import UsersAdmin from './admin/users/UsersAdmin';
 import AddUsers from './admin/users/AddUsers';
+import DetailOrder from './admin/orderadmin/DetailOrder';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
                           <Route path="/admin-add-tintuc/:id" exact component={AddTintuc}></Route>
                           <Route path="/admin-add-products/:id" exact component={AddProducts}></Route>
                           <Route path="/admin-order/page=:page" exact component={OrderAdmin}></Route>
+                          <Route path="/order-details/:id" component={DetailOrder}></Route>
                           <Route path="/all-users-admin/page=:page" exact component={UsersAdmin}></Route>
                           <Route path="/admin-add-users/:id" exact component={AddUsers}></Route>
                  </Switch> 

@@ -12,7 +12,7 @@ import OrdersService from "../../services/OrdersService";
 import Head from "../../share/Head";
 import Header from './../../share/Header';
 import Footer from './../../share/Footer';
-const tong = total();
+const tongtien = total();
 const userid = JSON.parse(localStorage.getItem("user"));
 class Order extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Order extends Component {
       note: '',
       date:date,
       status:'Chưa Xem',
-      tongtien:'',
+      tongtien: total(),
       carts: list(),
     };
     this.changeFullNameHandler = this.changeFullNameHandler.bind(this);
@@ -53,7 +53,7 @@ class Order extends Component {
       note: this.state.note,
       date: this.state.date,
       status:  this.state.status,
-      tongtien: tong,
+      tongtien:  this.state.tongtien,
     };
     console.log("info => " + JSON.stringify(info));
     OrdersService.CreateInfos(info).then((res) => {
@@ -227,7 +227,7 @@ class Order extends Component {
       <div className="card-body">
         <center>
         <h3 className="card-title mb-12 giadam">TỔNG CỘNG:<strong> <NumberFormat
-                              value={tong}
+                                value={tongtien}     
                               displayType={"text"}
                               thousandSeparator={true}
                             />đ </strong></h3></center>
@@ -246,7 +246,20 @@ class Order extends Component {
                             disabled
                           />
           </div> 
-         
+          <div className="col form-group col-md-5">
+            <label>Tiền Thanh Toán</label>
+            <input
+                            className="form-control"
+                            type="text"
+                            id="tongtien"
+                            name="tongtien"
+                            value={this.state.tongtien}                     
+                            onChange={this.changeTongtienHandler}
+                            required
+                            disabled
+                          
+                          />
+          </div>
           <div className="col form-group col-md-5">
             <label>Tên Người Nhận (*)</label>
             <input
@@ -260,20 +273,8 @@ class Order extends Component {
                           
                           />
           </div>
-          <div className="col form-group col-md-5">
-            <label>Tiền Thanh Toán</label>
-            <input
-                            className="form-control"
-                            type="text"
-                            id="tongtien"
-                            name="fullname"
-                            value={tong}                      
-                            onChange={this.changeTongtienHandler}
-                            required
-                            disabled
-                          
-                          />
-          </div>
+        
+         
         </div>
         <div className="form-row">
         <div className="col form-group col-md-2">

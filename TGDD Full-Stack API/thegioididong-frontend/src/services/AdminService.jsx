@@ -1,6 +1,11 @@
 import axios from "axios";
 class AdminService {
 
+
+
+
+
+
     async addImage(imageData) {
         return axios.post(`http://localhost:8080/admin/addimage`, imageData
         , {

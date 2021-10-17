@@ -4,6 +4,8 @@ import HeaderAdmin from './../share/HeaderAdmin';
 import MenuAdmin from './../share/MenuAdmin';
 import { confirmAlert } from 'react-confirm-alert';
 import AdminService from '../../services/AdminService';
+import NumberFormat from 'react-number-format';
+import OrdersService from '../../services/OrdersService';
 class OrderAdmin extends Component {
     constructor(props) {
         super(props);
@@ -52,21 +54,28 @@ class OrderAdmin extends Component {
                 });
             });
     }
+
+
     componentDidMount() {
         this.changcurrentPage(this.state.currentPage);
         this.findAll(this.state.currentPage);
-        AdminService.ListOrderDetail(this.state.id).then((res) => {
-            this.setState({ list_product: res.data });
-            console.log(this.state.list_product);
-            const result = this.state.list_product.reduce(
-              (total, currentValue) =>
-                (total = total + currentValue.price * currentValue.quantity),
-              0
-            );
-            console.log(result);
-            this.setState({ result: result });
-          });
+        // OrdersService.ListOrderDetail(this.state.id).then((res) => {
+        //     this.setState({ list_product: res.data });
+        //     console.log(this.state.list_product);
+        //     const result = this.state.list_product.reduce(
+        //       (total, currentValue) =>
+        //         (total = total + currentValue.price * currentValue.quantity),
+        //       0
+        //     );
+        //     console.log(result);
+        //     this.setState({ result: result });
+        //   });
+
+
+          
     }
+
+
     submit = (id) =>{
         confirmAlert({
           message: 'Hóa đơn này đã giao thành công !!!.',
@@ -110,7 +119,13 @@ class OrderAdmin extends Component {
                                         <td>{allproduct.date}</td>
                                         <td>{allproduct.fullname}</td>
                                         <td>{allproduct.address}</td>
-                                        <td>{allproduct.user_id}</td>
+                                        <td>
+                                        <NumberFormat
+                                style={{ marginLeft: "10px" }}
+                                value={allproduct.tongtien}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                            />đ               </td>
                                         <td>
                                         
                                                 <a
@@ -138,12 +153,9 @@ class OrderAdmin extends Component {
                                         </td>
                                         <td>
                    
-                   <div><i class="fas fa-eye iconadmin"></i></div>
-                   <br/>
-                   <div><i class="fas fa-edit iconadmin"></i></div>
-                   <br/>
-             
-               
+                   <div><a href={ "/order-details/" + allproduct.id_order
+                                                      }> <i class="fas fa-edit iconadmin"/></a></div>
+
                </td>
                                     </tr>
                                 ))}

@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,9 +28,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.tgdd.Enity.Category;
 import com.tgdd.Enity.Order;
+import com.tgdd.Enity.OrderDetails;
 import com.tgdd.Enity.Product;
 import com.tgdd.Enity.Tintuc;
 import com.tgdd.Enity.User;
@@ -39,6 +40,7 @@ import com.tgdd.Reponsitory.OrderReponsitory;
 import com.tgdd.Reponsitory.ProductReponsitory;
 import com.tgdd.Reponsitory.TintucReponsitory;
 import com.tgdd.Reponsitory.UserRepository;
+import com.tgdd.Reponsitory.OrderDetailRepository;
 
 
 @RestController
@@ -56,6 +58,22 @@ private CategoryReponsitory categoryReponsitory;
 private OrderReponsitory orderReponsitory;
 @Autowired
 private UserRepository userRepository;
+@Autowired
+private OrderDetailRepository orderDetailRepository;
+
+
+//lay-info-user-theo-id
+	@GetMapping("/info_user/{id}")
+	public List<Order> getListOrderDetail(@PathVariable(value = "id") String id) {
+		return orderReponsitory.ListInfoById(id);
+	}
+	// get list product order
+	@GetMapping("/list_order/list_product/{id}")
+	public List<OrderDetails> getListOrderDetailPro(@PathVariable(value = "id") String id) {
+		return orderDetailRepository.getListOrderDetail(id);
+	}
+
+
 
 
 private static String imageDirectory = System.getProperty("user.dir") + "/images/";

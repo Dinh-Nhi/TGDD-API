@@ -29,11 +29,13 @@ public class Order {
 	private String date;
 	@Column(name = "status")
 	private String status;
+	@Column(name = "tongtien")
+	private long tongtien;
 	public Order() {
 		super();
 	}
 	public Order(long id, String fullname, String phone, String address, String id_order, long user_id, String note,
-			String date, String status) {
+			String date, String status, long tongtien) {
 		super();
 		this.id = id;
 		this.fullname = fullname;
@@ -44,6 +46,7 @@ public class Order {
 		this.note = note;
 		this.date = date;
 		this.status = status;
+		this.tongtien = tongtien;
 	}
 	public long getId() {
 		return id;
@@ -99,5 +102,11 @@ public class Order {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+	public long getTongtien() {
+		return tongtien;
+	}
+	public void setTongtien(long tongtien) {
+		this.tongtien = tongtien;
+	}
+
 }

@@ -6618,7 +6618,16 @@ textarea.form-control-lg {
 .h-25 {
   height: 25% !important;
 }
-
+.giatienadmin{
+ font-size: 20px; 
+ color: red;
+ margin-top: 10px;
+ margin-bottom: 10px;
+ font-weight: bold;
+}
+.orderadmin{
+  margin-top: 50px;
+}
 .h-50 {
   height: 50% !important;
 }
@@ -9127,7 +9136,10 @@ textarea.form-control-lg {
     margin-right: 0 !important;
     margin-left: 0 !important;
   }
-
+.table-border2{
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+}
   .mx-lg-1 {
     margin-right: 0.25rem !important;
     margin-left: 0.25rem !important;
