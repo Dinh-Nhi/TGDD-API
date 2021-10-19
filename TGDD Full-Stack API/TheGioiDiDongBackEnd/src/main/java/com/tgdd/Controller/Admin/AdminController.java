@@ -61,12 +61,14 @@ private UserRepository userRepository;
 @Autowired
 private OrderDetailRepository orderDetailRepository;
 
-
 //lay-info-user-theo-id
 	@GetMapping("/info_user/{id}")
-	public List<Order> getListOrderDetail(@PathVariable(value = "id") String id) {
+	public Order getListOrderDetail(@PathVariable(value = "id") String id) {
 		return orderReponsitory.ListInfoById(id);
 	}
+
+	
+	
 	// get list product order
 	@GetMapping("/list_order/list_product/{id}")
 	public List<OrderDetails> getListOrderDetailPro(@PathVariable(value = "id") String id) {
@@ -199,7 +201,13 @@ public ResponseEntity<Map<String, Boolean>> deleteCategorys(@PathVariable Long i
 Page<Order> getAllAdminOrders(@RequestParam Optional<Integer> page, @RequestParam Optional<String> sortBy) {
 	return orderReponsitory.findAll(PageRequest.of(page.orElse(1), 10, Sort.Direction.ASC, sortBy.orElse("id")));
 }
-
+@PutMapping("/order/{id}")
+public ResponseEntity<Order> updateOrder(@PathVariable String id, @RequestBody Order orderDetails) {
+	Order order = orderReponsitory.getOrder(id);
+	order.setStatus(orderDetails.getStatus());
+	Order updateOrder = orderReponsitory.save(order);
+	return ResponseEntity.ok(updateOrder);
+}
 
 
 

@@ -18,5 +18,5 @@ public interface OrderReponsitory extends JpaRepository<Order, Long>  {
 	public Order getOrder(String id);
 	//get-info-user-by-id
 	@Query(value="SELECT * FROM orders where orders.id_order=?1 ", nativeQuery = true)
-	public List<Order> ListInfoById(String id);
+	public Order ListInfoById(String id);
 }

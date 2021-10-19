@@ -27,7 +27,7 @@ class Order extends Component {
       user_id: userid.id,
       note: '',
       date:date,
-      status:'Chưa Xem',
+      status:'CHƯA XEM',
       tongtien: total(),
       carts: list(),
     };

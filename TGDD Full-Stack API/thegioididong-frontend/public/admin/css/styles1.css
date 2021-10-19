@@ -9131,6 +9131,35 @@ textarea.form-control-lg {
   .m-lg-auto {
     margin: auto !important;
   }
+.buttonorder{
+background-size: auto;
+background-color: yellow;
+}
+
+.label{
+  font-size: 16px;
+}
+.tenstatus{
+  font-weight: bold;
+}
+.luugia{
+  margin-top: 10px;
+}
+.list__item {
+  margin-left: 150px;
+  height: 80%;
+  width:60%;
+  display: block;
+  background: white;
+  border: 2px solid rgb(16, 19, 18);
+  border-radius: 20px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  margin: 1rem;
+  text-align: center;
+  position: relative;
+}
+
 
   .mx-lg-0 {
     margin-right: 0 !important;

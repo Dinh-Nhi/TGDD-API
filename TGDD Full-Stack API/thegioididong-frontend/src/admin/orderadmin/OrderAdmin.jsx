@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import FooterAdmin from './../share/FooterAdmin';
 import HeaderAdmin from './../share/HeaderAdmin';
 import MenuAdmin from './../share/MenuAdmin';
-import { confirmAlert } from 'react-confirm-alert';
 import AdminService from '../../services/AdminService';
 import NumberFormat from 'react-number-format';
-import OrdersService from '../../services/OrdersService';
 class OrderAdmin extends Component {
     constructor(props) {
         super(props);
@@ -58,40 +56,8 @@ class OrderAdmin extends Component {
 
     componentDidMount() {
         this.changcurrentPage(this.state.currentPage);
-        this.findAll(this.state.currentPage);
-        // OrdersService.ListOrderDetail(this.state.id).then((res) => {
-        //     this.setState({ list_product: res.data });
-        //     console.log(this.state.list_product);
-        //     const result = this.state.list_product.reduce(
-        //       (total, currentValue) =>
-        //         (total = total + currentValue.price * currentValue.quantity),
-        //       0
-        //     );
-        //     console.log(result);
-        //     this.setState({ result: result });
-        //   });
-
-
-          
+        this.findAll(this.state.currentPage);    
     }
-
-
-    submit = (id) =>{
-        confirmAlert({
-          message: 'Hóa đơn này đã giao thành công !!!.',
-          buttons: [
-            {
-              label: 'OK',
-              // onClick: () => this.deleteOrder(id),
-              onClick: () => this.onClose
-            },
-            {
-              label: 'Hủy',
-              onClick: () => this.onClose
-            }
-          ]
-        });
-      };
     render() {
         return (
             <div className="sb-top4-fixed backgroundadmin">
@@ -127,7 +93,7 @@ class OrderAdmin extends Component {
                                 thousandSeparator={true}
                             />đ               </td>
                                         <td>
-                                        
+                                 
                                                 <a
                                                     type="button"
                                                     className="btn btn-primary"
@@ -139,23 +105,14 @@ class OrderAdmin extends Component {
                                                 >
                                                       {allproduct.status}
                                                 </a>
-                                         
-                                            {/* <div style={{ display: "flex",marginLeft:"5px" }}>
-                                                <a
-                                                    type="button"
-                                                    className="btn btn-danger"
-                                                    style={{ fontSize: "12px",color:"white" }}
-                                                    onClick={ () => this.submit(allproduct.id_order)}
-                                                >
-                                                   Giao hàng thành công
-                                                </a>
-                                            </div>                                         */}
                                         </td>
                                         <td>
                    
                    <div><a href={ "/order-details/" + allproduct.id_order
-                                                      }> <i class="fas fa-edit iconadmin"/></a></div>
-
+                                                      }> 
+                                                      <i class="fas fa-edit iconadmin"/>
+                                                     
+                                                      </a></div>
                </td>
                                     </tr>
                                 ))}

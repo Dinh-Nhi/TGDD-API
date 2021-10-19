@@ -12,11 +12,8 @@ class OrdersService {
 ListOrderDetail(id_order){
     return axios.get("http://localhost:8080/list_order/list_product"+'/'+id_order);
 }
-deleteOrder(idor){
-    return axios.delete("http://localhost:8080/info_order" + '/' + idor);
-}
-deleteOrderDetail(idor){
-    return axios.delete("http://localhost:8080/order_detail" + '/' + idor);
+updateOrder(order, orderId) {
+  return axios.put("http://localhost:8080/admin/order" + '/' + orderId, order);
 }
 //lay-tat-ca-don-hang
 getAllOrder(page){
@@ -24,7 +21,7 @@ getAllOrder(page){
 }
 //get-info-user-by-id
 getInfoUserById(idor){
-  return axios.get("http://localhost:8080/info_user"+'/'+idor);
+  return axios.get("http://localhost:8080/admin/info_user"+'/'+idor);
 }
 }
 

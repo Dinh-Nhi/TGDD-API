@@ -1,7 +1,6 @@
 package com.tgdd.Controller.Order;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -30,7 +29,7 @@ public class OrderController {
 	private OrderReponsitory orderReponsitory;
 //lay-info-user-theo-id
 	@GetMapping("/info_user/{id}")
-	public List<Order> getListOrderDetail(@PathVariable(value = "id") String id) {
+	public Order	 getListOrderDetail(@PathVariable(value = "id") String id) {
 		return orderReponsitory.ListInfoById(id);
 	}
 //lay-all-order

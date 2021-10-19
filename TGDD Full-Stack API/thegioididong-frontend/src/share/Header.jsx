@@ -10,7 +10,6 @@ import {
   remove,
   onChange,
 } from "cart-localstorage";
-import NumberFormat from "react-number-format";
 const totalOrder=localStorage.getItem("count_order");
 const tong = total();
 var tongsp = list().length;
