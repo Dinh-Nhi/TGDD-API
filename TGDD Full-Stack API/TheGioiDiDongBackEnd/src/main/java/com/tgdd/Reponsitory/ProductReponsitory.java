@@ -97,6 +97,10 @@ public interface ProductReponsitory extends JpaRepository<Product, Long> {
 	@Query(value = "SELECT * FROM Products p  ORDER BY id DESC", nativeQuery = true)
 	public List<Product> listpro();
 
+
+	@Query(value = "SELECT * FROM Products   ORDER BY id DESC", nativeQuery = true)
+	public Page<Product> findAllPro(PageRequest of);
+
 	
 	
 

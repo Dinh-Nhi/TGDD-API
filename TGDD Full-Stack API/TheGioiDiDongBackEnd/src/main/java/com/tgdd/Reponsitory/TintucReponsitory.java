@@ -2,6 +2,8 @@ package com.tgdd.Reponsitory;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,5 +24,9 @@ public interface TintucReponsitory extends JpaRepository<Tintuc, Long> {
 
 	@Query(value = "select *  from Tintuc p where p.tin_idsp = ?1  ORDER BY p.ngaytao DESC  LIMIT 6", nativeQuery = true)
 	public List<Tintuc> findTinCungLoaiById(Integer tin_idsp);
+
+
+	@Query(value = "select *  from Tintuc  ORDER BY id DESC", nativeQuery = true)
+	public Page<Tintuc> findAllTinTuc(PageRequest of);
 
 }

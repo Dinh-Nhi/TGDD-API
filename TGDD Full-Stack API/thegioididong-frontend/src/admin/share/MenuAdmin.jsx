@@ -13,6 +13,12 @@ class MenuAdmin extends Component {
                 <div className="sb-sidetop4-menu">
                   <div className="top4">
                     <div className="sb-sidetop4-menu-heading">DANH MỤC</div>
+                    <a className="top4-link" href="/admin">
+                      <div className="sb-top4-link-icon">
+                        <i className="fas fa-home" />
+                      </div>
+                       ADMIN
+                    </a>
                     <a className="top4-link" href="/all-categorys-admin/page=1">
                       <div className="sb-top4-link-icon">
                         <i className="fas fa-table" />

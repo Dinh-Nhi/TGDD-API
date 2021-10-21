@@ -106,12 +106,12 @@ public ResponseEntity<?> uploadImage(@RequestParam("imageFile") MultipartFile fi
 //PRODUCT_ADMIN START
 @GetMapping("/all-product")
 Page<Product> getAllProduct(@RequestParam Optional<Integer> page, @RequestParam Optional<String> sortBy) {
-	return productReponsitory.findAll(PageRequest.of(page.orElse(1), 10, Sort.Direction.ASC, sortBy.orElse("id")));
+	return productReponsitory.findAllPro(PageRequest.of(page.orElse(1), 10, Sort.Direction.ASC, sortBy.orElse("id")));
 }
 
 @GetMapping("/all-tintuc")
 Page<Tintuc> getAllTintuc(@RequestParam Optional<Integer> page, @RequestParam Optional<String> sortBy) {
-	return tintucReponsitory.findAll(PageRequest.of(page.orElse(1), 10, Sort.Direction.ASC, sortBy.orElse("id")));
+	return tintucReponsitory.findAllTinTuc(PageRequest.of(page.orElse(1), 10, Sort.Direction.ASC, sortBy.orElse("id")));
 }
 @GetMapping("/tintuc/{id}")
 public ResponseEntity<Tintuc> getTintucById(@PathVariable Long id) {
@@ -199,8 +199,11 @@ public ResponseEntity<Map<String, Boolean>> deleteCategorys(@PathVariable Long i
 
 @GetMapping("/all-orders")
 Page<Order> getAllAdminOrders(@RequestParam Optional<Integer> page, @RequestParam Optional<String> sortBy) {
-	return orderReponsitory.findAll(PageRequest.of(page.orElse(1), 10, Sort.Direction.ASC, sortBy.orElse("id")));
+	return orderReponsitory.findAllOrder(PageRequest.of(page.orElse(1), 10, Sort.Direction.ASC, sortBy.orElse("id")));
 }
+
+
+
 @PutMapping("/order/{id}")
 public ResponseEntity<Order> updateOrder(@PathVariable String id, @RequestBody Order orderDetails) {
 	Order order = orderReponsitory.getOrder(id);

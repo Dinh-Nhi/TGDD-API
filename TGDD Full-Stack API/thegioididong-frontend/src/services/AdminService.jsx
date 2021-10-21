@@ -27,7 +27,7 @@ class AdminService {
     getAllAdminProducts(page) {
         return axios.get("http://localhost:8080/admin/all-product?page=" + page);
     }
-  
+  //    ORDER
     getAdminOrders(page){
         return axios.get("http://localhost:8080/admin/all-orders?page=" + page);
       }
