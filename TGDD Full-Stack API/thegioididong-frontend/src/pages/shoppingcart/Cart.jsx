@@ -183,7 +183,7 @@ class Cart extends Component {
                               </div>
                               </td>
                 <td className="text-right"> 
-                  <a href className="btn btn-light"  onClick={(e) => this.RemoveAddCart(cat.id)}> <i class="fa fa-trash-o"></i></a>
+                  <a href className="btn btn-light"  onClick={(e) => this.RemoveAddCart(cat.id)}> <i class="fa fa-trash"></i></a>
                 </td>
                 
               </tr>

@@ -37,10 +37,9 @@ class AddTintuc extends Component {
             ngaytao: '',
             tin_idsp: '',
             primg: [],
-            mau: '0',
             selectedFile: null
         }
-        this.MauValueChange = this.MauValueChange.bind(this);
+
         this.changeTenHandler = this.changeTenHandler.bind(this);
         this.changeChiTietHandler = this.changeChiTietHandler.bind(this);
         this.changMieuTaHandler = this.changMieuTaHandler.bind(this);
@@ -59,7 +58,7 @@ class AddTintuc extends Component {
         if(this.state.id === '_add'){
             return
         }else{
-            AdminService.getTintucById(this.state.id).then( (res) =>{
+            Service.getTintucsById(this.state.id).then( (res) =>{
                 let tintuc = res.data;
                 this.setState({
             ten: tintuc.ten,
@@ -95,6 +94,8 @@ class AddTintuc extends Component {
         if(this.state.id === '_add'){
             AdminService.CreateTintuc(tintuc).then(res =>{
                 this.addProductImage(anh);
+                this.addProductImage(anh2);
+                this.addProductImage(anh3);
                 this.props.history.push('/all-tintuc-admin/page=1');
                 confirmAlert({
                     message: 'Thêm thành công !!!.',
@@ -109,6 +110,8 @@ class AddTintuc extends Component {
         }else{
             AdminService.updateTintuc(tintuc, this.state.id).then( res => {
                 this.addProductImage(anh);
+                this.addProductImage(anh2);
+                this.addProductImage(anh3);
                 this.props.history.push('/all-tintuc-admin/page=1');
                 confirmAlert({
                     message: 'Sửa thành công !!!.',
@@ -123,10 +126,7 @@ class AddTintuc extends Component {
         }
     }
 
-    MauValueChange(e) {
-        const value = e.target.value;
-        this.setState({ mau: value });
-      }
+   
     changeTinIdspHandler = (event) => {
         this.setState({ tin_idsp: event.target.value });
     }
@@ -384,10 +384,11 @@ class AddTintuc extends Component {
                                     </div>
                                     <div className="form-group col-md-4">
                                         <label htmlFor="username">Tin của sản phẩm:</label>
-                                        <select  class="form-control" onChange={this.MauValueChange}>
-                          <option value="0" selected>Mặc định</option>
+                                        <select  class="form-control"      value={this.state.tin_idsp}
+                                         onChange={this.changeTinIdspHandler}>
+                          <option value="0" selected>Không chọn</option>
                           {this.state.primg.map((primg) => (
-                            <option value={primg.id}>{primg.id}
+                            <option value={primg.id}>{primg.ten}
                             </option>
                           ))}
 

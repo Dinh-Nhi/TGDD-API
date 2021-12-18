@@ -14,7 +14,16 @@ class AdminService {
             }
         });
     }
-
+    async addProductImage(imageData, productId, type) {
+        const response = await axios.post(`http://localhost:8080/admin/add-product-image/${productId}`, imageData, {
+            onUploadProgress: progressEvent => {
+                console.log("Uploading : " + ((progressEvent.loaded / progressEvent.total) * 100).toString() + "%")
+            },
+            params: {
+                type
+            }
+        });
+    }
 
 
 
@@ -27,6 +36,40 @@ class AdminService {
     getAllAdminProducts(page) {
         return axios.get("http://localhost:8080/admin/all-product?page=" + page);
     }
+ CreateProduct(product) {
+        return axios.post("http://localhost:8080/admin/addProduct", product);
+    }
+    updateproducts(product, id) {
+        return axios.put(
+          "http://localhost:8080/admin/product/" + id,
+          product
+        );
+      }
+      updateimages(productimages,id) {
+        return axios.put(
+          "http://localhost:8080/admin/product-images/"+id,
+          productimages
+        );
+      }
+      deleteProduct(productId) {
+        return axios.delete("http://localhost:8080/admin/product" + '/' + productId);
+    }
+
+
+    getAllAdminTinTuc(page) {
+        return axios.get("http://localhost:8080/admin/all-tintuc?page=" + page);
+    }
+    CreateTintuc(tintuc) {
+        return axios.post("http://localhost:8080/admin/addTintuc", tintuc);
+    }
+    updateTintuc(tintuc, tintucId) {
+        return axios.put("http://localhost:8080/admin/tintuc" + '/' + tintucId, tintuc);
+    }
+    deleteTintuc(tintucId) {
+        return axios.delete("http://localhost:8080/admin/tintuc" + '/' + tintucId);
+    }
+
+
   //    ORDER
     getAdminOrders(page){
         return axios.get("http://localhost:8080/admin/all-orders?page=" + page);
@@ -54,23 +97,8 @@ class AdminService {
 
 
 
-    getAllAdminTinTuc(page) {
-        return axios.get("http://localhost:8080/admin/all-tintuc?page=" + page);
-    }
-    CreateTintuc(tintuc) {
-        return axios.post("http://localhost:8080/admin/addTintuc", tintuc);
-    }
-    updateTintuc(tintuc, tintucId) {
-        return axios.put("http://localhost:8080/admin/tintuc" + '/' + tintucId, tintuc);
-    }
-    deleteTintuc(tintucId) {
-        return axios.delete("http://localhost:8080/admin/tintuc" + '/' + tintucId);
-    }
-    getTintucById(tintucId) {
-        return axios.get("http://localhost:8080/admin/tintuc" + '/' + tintucId);
-    }
 
-
+  
 
     getAllAdminCategorys(page) {
         return axios.get("http://localhost:8080/admin/all-categorys?page=" + page);
@@ -88,10 +116,6 @@ class AdminService {
         return axios.get("http://localhost:8080/admin/category" + '/' + categoryId);
     }
 
-
-    getCategory() {
-        return axios.get("http://localhost:8080/admin/get-all-category-chirlden");
-    }
 
 
 

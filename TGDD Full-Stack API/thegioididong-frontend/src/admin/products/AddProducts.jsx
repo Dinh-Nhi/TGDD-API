@@ -1,85 +1,113 @@
 import React, { Component } from 'react';
+import Service from '../../services/Service';
+import AdminService from '../../services/AdminService';
 import FooterAdmin from './../share/FooterAdmin';
 import HeaderAdmin from './../share/HeaderAdmin';
-import AdminService from '../../services/AdminService';
 import MenuAdmin from './../share/MenuAdmin';
+import { confirmAlert } from 'react-confirm-alert';
 const required = (value) => {
-    if (!value) {
+  if (!value) {
       return (
-        <div className="alert alert-danger" role="alert">
-          Bắt buộc nhập !!!
-        </div>
+          <div className="alert alert-danger" role="alert">
+              Bắt buộc nhập !!!
+          </div>
       );
-    }
-  };
-  var image = [];
-  var arraynew = [];
-  var arrayrelated = [];
-  var arrayimages = [];
-  var seletedImage = [];
-  const date = new Date().toLocaleDateString();
+  }
+};
+var anh = [];
+var anh2 = [];
+var anh3 = [];
+var detailanh = [];
+var seletedImage = [];
 class AddProducts extends Component {
-    fileObj = [];
-    fileArray = [];
-    constructor(props) {
+     constructor(props) {
       super(props);
       this.state = {
         // step 2
         id: this.props.match.params.id,
-        ten: " ",
+        id_categorys: "",
         anh: " ",
-        anh2: " ",
-        anh3: "",
+        ten: " ",
         giaban:  "",
         phantramgiam: " ",
+        anh2: " ",
         detailanh: "",
         noibat: "false",
         ngaytao: "",
+        anh3: "",
         chuongtrinh: "",
         quatang: "",
         pkdikem: "",
         ytbrivew: "",
-        cateid: "",
+        giagoc: "",
         categorys: [],
-
-
-        imageDatas: [],
-        selectedFile: null,
-        selectedValueProduct: [],
-        selectedImage: " ",
-        loading: false,
-        message: "",
+        products: [],
+        primg: [],
+        IdProductsImages: " ",
+     
       };
-      this.changeTenHandler = this.changeTenHandler.bind(this);
+      this.changeIdCateHandler = this.changeIdCateHandler.bind(this);
       this.changeAnhHandler = this.changeAnhHandler.bind(this);
-      this.changeAnh2Handler = this.changeAnh2Handler.bind(this);
-      this.changeAnh3Handler = this.changeAnh3Handler.bind(this);
+      this.changeTenHandler = this.changeTenHandler.bind(this);
       this.changeGiaBanHandler = this.changeGiaBanHandler.bind(this);
       this.changePhanTramGiamHandler = this.changePhanTramGiamHandler.bind(this);
+      this.changeAnh2Handler = this.changeAnh2Handler.bind(this);
       this.changeDetailanhHandler = this.changeDetailanhHandler.bind(this);
       this.changeNoiBatHandler = this.changeNoiBatHandler.bind(this);
       this.changeNgayTaoHandler = this.changeNgayTaoHandler.bind(this);
+      this.changeAnh3Handler = this.changeAnh3Handler.bind(this);
       this.changeChuongTrinhlHandler = this.changeChuongTrinhlHandler.bind(this);
       this.changeQuaTangHandler = this.changeQuaTangHandler.bind(this);
       this.changePkdikemHandler = this.changePkdikemHandler.bind(this);
       this.changeYtbrivewHandler = this.changeYtbrivewHandler.bind(this);
-      this.saveOrupDateProduct = this.saveOrupDateProduct.bind(this);
+      this.changeGiaGocHandler = this.changeGiaGocHandler.bind(this);
+      this.addProductImage = this.addProductImage.bind(this);
       this.changeImageHandler = this.changeImageHandler.bind(this);
+      this.saveProduct = this.saveProduct.bind(this);
+  
     }
-    // step 3
+     // step 3
     componentDidMount() {
-      AdminService.getCategory().then((res) => {
+      Service.getCategorys().then((res) => {
         this.setState({ categorys: res.data });
       });
-      AdminService.getAllProductNoPaginiton().then((response) => {
-        this.setState({ product: response.data, arrayrelated: response.data });
-  
+      Service.getAllSP().then((res) => {
+        this.setState({ products: res.data });
       });
-  
+      Service.getProductsDetailImgById(this.state.id).then(res => {
+        this.setState({ primg: res.data });
+      });
+   // step 4
+        if(this.state.id === '_add'){
+            return
+        }else{
+            Service.getProductsById(this.state.id).then( (res) =>{
+                let product = res.data;
+                this.setState({
+        id_categorys: product.id_categorys,
+        ten: product.ten,
+        anh: product.anh,
+        anh2: product.anh2,
+        anh3: product.anh3,
+        giaban:product.giaban,
+        phantramgiam:product.phantramgiam,
+        detailanh: product.detailanh,
+        noibat:product.noibat,
+        ngaytao: product.ngaytao,
+        chuongtrinh: product.chuongtrinh,
+        quatang: product.quatang,
+        pkdikem: product.pkdikem,
+        ytbrivew: product.ytbrivew,
+        giagoc : product.giagoc,
+      
+                });
+            });
+        }        
     }
-    saveOrupDateProduct = (e) => {
+       saveProduct = (e) => {
       e.preventDefault();
       let product = {
+        id_categorys: this.state.id_categorys,
         ten: this.state.ten,
         anh: this.state.anh,
         anh2: this.state.anh2,
@@ -93,111 +121,61 @@ class AddProducts extends Component {
         quatang: this.state.quatang,
         pkdikem: this.state.pkdikem,
         ytbrivew: this.state.ytbrivew,
-        cateid: this.state.cateid,
-      };
-      console.log("product => " + JSON.stringify(product));
-      this.setState({
-        message: "",
-        loading: true,
-      });
-  
-      this.form.validateAll();
-  
-      if (this.checkBtn.context._errors.length === 0) {
-        AdminService.CreateProduct(product).then(
-          async (res) => {
-            for (const f of this.state.imageDatas) {
-              this.addProductImage(f);
-            }
-            this.addProductImage(image);
-            let ProductNew = res.data;
-            this.setState({ IdproductNews: ProductNew.id });
-            console.log("id =>" + this.state.IdproductNews);
-  
-            await AdminService.updateimages(seletedImage, this.state.IdproductNews).then((res) => {
-  
+        giagoc: this.state.giagoc,};
+        console.log('product => ' + JSON.stringify(product));
+
+        // step 5
+        if(this.state.id === '_add'){
+          AdminService.CreateProduct(product).then(
+            async (res) => {
+              for (const f of this.state.imageDatas) {
+                this.addProductImage(f);
+              }
+              this.addProductImage(anh);
+              this.addProductImage(anh2);
+              this.addProductImage(anh3);
+              this.addProductImage(detailanh);
+              let ProductNew = res.data;
+
+              this.setState({ IdProductsImages: ProductNew.id });
+              console.log("id =>" + this.state.IdProductsImages);   
+              await AdminService.updateimages(seletedImage, this.state.IdProductsImages).then((res) => {
+              });
+                this.props.history.push('/all-product-admin/page=1');
+                confirmAlert({
+                    message: 'Thêm thành công !!!.',
+                    buttons: [
+                      {
+                        label: 'OK',
+                        onClick: () => this.onClose
+                      }
+                    ]
+                  });
             });
-            await AdminService.updateprolated(arrayrelated, this.state.IdproductNews).then((res) => {
-  
+        }else{
+            AdminService.updateproducts(product, this.state.id).then( res => {
+              this.addProductImage(anh);
+              this.addProductImage(anh2);
+              this.addProductImage(anh3);
+              this.addProductImage(detailanh);
+                this.props.history.push('/all-product-admin/page=1');
+                confirmAlert({
+                    message: 'Sửa thành công !!!.',
+                    buttons: [
+                      {
+                        label: 'OK',
+                        onClick: () => this.onClose
+                      }
+                    ]
+                  });
             });
-            this.props.history.push("/all-product-admin/page=" + localStorage.getItem("pagePresent"));
-            window.location.reload();
-          },
-          (error) => {
-            const resMessage =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-              error.message ||
-              error.toString();
-  
-            this.setState({
-              loading: false,
-              message: resMessage,
-            });
-          }
-        );
-      } else {
-        this.setState({
-          loading: false,
-        });
-      }
-  
-    };
-    changeChuongTrinhlHandler = (event) => {
-        this.setState({ chuongtrinh: event.target.value });
-      };
-      changeQuaTangHandler = (event) => {
-        this.setState({ quatang: event.target.value });
-      };
-      changePkdikemHandler = (event) => {
-        this.setState({ pkdikem: event.target.value });
-      };
-      changeYtbrivewHandler = (event) => {
-        this.setState({ ytbrivew: event.target.value });
-      };
-    changeNgayTaoHandler = (event) => {
-        this.setState({ ngaytao: event.target.value });
-      };
-    changeTenHandler = (event) => {
-      this.setState({ ten: event.target.value });
-    };
-    changeAnhHandler = (event) => {
-        this.setState({ anh: event.target.value });
-      };
-      changeAnh2Handler = (event) => {
-        this.setState({ anh2: event.target.value });
-      };
-      changeAnh3Handler = (event) => {
-        this.setState({ anh3: event.target.value });
-      };
-      changeGiaBanHandler = (event) => {
-        this.setState({ giaban: event.target.value });
-      };
-      changePhanTramGiamHandler = (event) => {
-        this.setState({ phantramgiam: event.target.value });
-      };
-      changeDetailanhHandler = (event) => {
-        this.setState({ detailanh: event.target.value });
-      };
-      changeNoiBatHandler = (event) => {
-        this.setState({ noibat: event.target.value });
-      };
-     
-    // changeAnhHandler = (e) => {
-  
-    //   image = [];
-    //   let file = e.target.files[0];
-    //   const imageData = new FormData();
-    //   imageData.append('imageFile', file);
-    //   this.setState({ image: file.name });
-    //   image = imageData;
-  
-    // }
-  
+        }
+    }
+// ảnh liên quan
     changeImageHandler = (event) => {
-  
+
       let files = event.target.files;
+  
       let imageArrays = [];
       seletedImage = [];
       for (const f of files) {
@@ -215,13 +193,100 @@ class AddProducts extends Component {
 
 
 
-    changeCateHandler = (event) => {
-      this.setState({ cateid: event.target.value });
+    addProductImage = async (productId) => {
+      await AdminService.addImage(productId);
+  };
+    changeAnhHandler = (e) => {
+      anh = [];
+      let file = e.target.files[0];
+      const imageData = new FormData();
+      imageData.append('imageFile', file);
+      this.setState({ anh: file.name });
+      anh = imageData;
+      console.log("image_new=>" + anh);
+
+  }
+  changeAnh2Handler = (e) => {
+      anh2 = [];
+      let file = e.target.files[0];
+      const imageData = new FormData();
+      imageData.append('imageFile', file);
+      this.setState({ anh2: file.name });
+      anh2 = imageData;
+
+  }
+  changeAnh3Handler = (e) => {
+      anh3 = [];
+      let file = e.target.files[0];
+      const imageData = new FormData();
+      imageData.append('imageFile', file);
+      this.setState({ anh3: file.name });
+      anh3 = imageData;
+
+  }
+  changeDetailanhHandler = (e) => {
+    detailanh = [];
+    let file = e.target.files[0];
+    const imageData = new FormData();
+    imageData.append('imageFile', file);
+    this.setState({ detailanh: file.name });
+    detailanh = imageData;
+
+}
+
+
+
+
+
+ changeIdCateHandler = (event) => {
+        this.setState({ id_categorys: event.target.value });
+      };
+  changeTenHandler = (event) => {
+      this.setState({ ten: event.target.value });
     };
-    cancel() {
+  changeGiaBanHandler = (event) => {
+        this.setState({ giaban: event.target.value });
+      };
+      changePhanTramGiamHandler = (event) => {
+        this.setState({ phantramgiam: event.target.value });
+      };
+  
+  changeNoiBatHandler = (event) => {
+        this.setState({ noibat: event.target.value });
+      };
+  changeNgayTaoHandler = (event) => {
+        this.setState({ ngaytao: event.target.value });
+      };
+    
+    changeChuongTrinhlHandler = (event) => {
+        this.setState({ chuongtrinh: event.target.value });
+      };
+      changeQuaTangHandler = (event) => {
+        this.setState({ quatang: event.target.value });
+      };
+      changePkdikemHandler = (event) => {
+        this.setState({ pkdikem: event.target.value });
+      };
+      changeYtbrivewHandler = (event) => {
+        this.setState({ ytbrivew: event.target.value });
+      };
+        changeGiaGocHandler = (event) => {
+        this.setState({ giagoc: event.target.value });
+      };
+   
+      cancel() {
       this.props.history.push("/all-product-admin/page=" + localStorage.getItem("pagePresent"));
     }
-    render() {
+       getTitle(){
+        if(this.state.id === '_add'){
+            return  <center> 
+                <button style={{ height: "38px", marginTop: "40px", marginBottom: "20px", marginLeft: "3px" }} type="text" className="btn btn-success" ><i class="far fa-plus-square"></i> Thêm sản phẩm mới</button></center>
+        }else{
+            return <center> 
+                 <button style={{ height: "38px", marginTop: "40px", marginBottom: "20px", marginLeft: "3px" }} type="text" className="btn btn-info" ><i class="far fa-plus-square"></i> Sửa sản phẩm </button></center>
+        }
+    }
+   render() {
       return (
         <div className="sb-top4-fixed backgroundadmin">
           <HeaderAdmin />
@@ -229,106 +294,47 @@ class AddProducts extends Component {
             <MenuAdmin />
             <div id="layoutSidetop4_content">
               <div >
-             <div style={{display:"flex"}}>
-                <h3 style={{ marginLeft: "36px", marginTop: "16px" }}>
-                  <i class="far fa-plus-square"></i> Thêm sản phẩm mới
-                </h3></div>
+          {
+                                    this.getTitle()
+             }
                 <div style={{ backgroundColor: "white", marginLeft: "40px", marginTop: "20px", marginRight: "30px" }}>
                   <div className="card-body">
                   <form>
                       <div className="row">
                          
-                         <div className="form-group col-md-4">
+                         <div className="form-group col-md-5">
                           <label htmlFor="username">Tên sản phẩm: </label>                  
                             <input  name="ten" className="form-control" 
                             value={this.state.ten} onChange={this.changeTenHandler}/>
                         </div>
-                        <div className="form-group col-md-4">
-                            <label htmlFor="password">Giá tiền</label>                         
+
+                          <div className="form-group col-md-2">
+                            <label htmlFor="password">Giá gốc</label>                         
+                             <input   min="10000"  type="number" name="giaban" className="form-control" 
+                            value={this.state.giagoc} onChange={this.changeGiaGocHandler}/>
+                          </div>  
+                        <div className="form-group col-md-2">
+                            <label htmlFor="password">Giá bán</label>                         
                              <input   min="10000"  type="number" name="giaban" className="form-control" 
                             value={this.state.giaban} onChange={this.changeGiaBanHandler}/>
-                          </div>                      
-                          <div className="form-group col-md-4">
+                          </div>   
+                                           
+                          <div className="form-group col-md-3">
                              <label htmlFor="password">Giảm:(%) </label>
                             <input   min="0"  type="number" name="phantramgiam" className="form-control" 
                             value={this.state.phantramgiam} onChange={this.changePhanTramGiamHandler}/>
                           </div>
-                        <div className="form-group  col-md-6">
+                        <div className="form-group  col-md-3">
                           <label htmlFor="username">Chương Trình: </label>                  
                             <input  name="ten" className="form-control" 
                             value={this.state.chuongtrinh} onChange={this.changeChuongTrinhlHandler}/>
                         </div>
-                        <div className="form-group  col-md-6">
+                        <div className="form-group  col-md-2">
                           <label htmlFor="username">Quà Tặng: </label>                  
                             <input  name="ten" className="form-control" 
                             value={this.state.quatang} onChange={this.changeQuaTangHandler}/>
                         </div>
-                      
-                        <div className="form-group  col-md-6">
-                          <label htmlFor="username">Link YouTuBe Riview: </label>                  
-                            <input  name="ten" className="form-control" 
-                            value={this.state.ytbrivew} onChange={this.changeYtbrivewHandler}/>
-                        </div>
-                        <div className="form-group  col-md-6">
-                          <label htmlFor="username">Phụ Kiện Đi Kèm: </label>                  
-                            <input  name="ten" className="form-control" 
-                            value={this.state.pkdikem} onChange={this.changePkdikemHandler}/>
-                        </div>
-                          <div className="form-group  col-md-3">
-                            <label htmlFor="username"> Hình ảnh: </label>
-                            <input
-                              name="anh"
-                              type="file"
-                              className="form-control"
-                              accept="image/*"
-                              onChange={this.changeAnhHandler}
-                            />                          
-                          </div>
-                          <div className="form-group  col-md-3">
-                            <label htmlFor="username"> Hình ảnh 2: </label>
-                            <input
-                              name="anh2"
-                              type="file"
-                              className="form-control"
-                              accept="image/*"
-                              onChange={this.changeAnh2Handler}
-                            />                          
-                          </div>
-                          <div className="form-group  col-md-3">
-                            <label htmlFor="username"> Hình ảnh 3: </label>
-                            <input
-                              name="anh3"
-                              type="file"
-                              className="form-control"
-                              accept="image/*"
-                              onChange={this.changeAnh3Handler}
-                            />                          
-                          </div>
-                          <div className="form-group  col-md-3">
-                            <label htmlFor="username">Ảnh Chi Tiết Sản Phẩm: </label>
-                            <input
-                              name="detailanh"
-                              type="file"
-                              className="form-control"
-                              accept="image/*"
-                              onChange={this.changeDetailanhHandler}
-                            />                          
-                          </div>
-                              
-                          <div><img style={{ width: "100px", marginLeft: "10px" }} src={`http://localhost:8080/images/${this.state.image}`} alt="" /></div>
-                          <div className="form-group col-md-6">
-                            <label htmlFor="username"> Hình ảnh liên quan: <p style={{ float: "right", marginLeft: "10px" }}>(Giữ Ctrl để chọn nhiều ảnh)</p></label>
-                            <input
-                              name="image"
-                              type="file"
-                              placeholder="Giữ Ctrl để chọn nhiều ảnh"
-                              multiple
-                              className="form-control"
-                              accept="image/*"
-                              onChange={this.changeImageHandler}
-                            />
-                          </div>
-                          <div className = "form-group col-md-3">
+                              <div className = "form-group col-md-2">
                                         <label htmlFor="username">Nổi Bật:</label>
                                         <select className="form-select"
                                             value={this.state.noibat}
@@ -339,78 +345,151 @@ class AddProducts extends Component {
                                           
                                         </select>
                                     </div>
-                                    <div className="form-group col-md-3">
+                                    <div className="form-group col-md-2">
                                         <label htmlFor="username">Ngày Tạo:</label>
                                          <input   type="date" name="ngaytao" className="form-control" 
                                                 value={this.state.ngaytao} onChange={this.changeNgayTaoHandler}/>
                                     </div>  
-                         
-                        
-                      
-                        
-                      
-                        
-                          {/* <div className="form-group">
-                            <label htmlFor="password">Sản phẩm liên quan:  </label>
-                            <Multiselect
-                              options={this.state.product} // Options to display in the dropdown
-                              selectedValues={this.state.selectedValueProduct} // Preselected value to persist in dropdown
-                              onSelect={this.onSelectPro} // Function will trigger on select event
-                              onRemove={this.onRemovePro} // Function will trigger on remove event
-                              displayValue="title" // Property name to display in the dropdown options
-                              selectionLimit="6"
+                        <div className="form-group  col-md-3">
+                          <label htmlFor="username">Link YouTuBe Riview: </label>                  
+                            <input  name="ten" className="form-control" 
+                            value={this.state.ytbrivew} onChange={this.changeYtbrivewHandler}/>
+                        </div>
+
+
+
+
+                     
+                          <div className="form-group  col-md-3">
+                            <label htmlFor="username">Ảnh Chính: </label>
+                            <input
+                              name="anh"
+                              type="file"
+                              className="form-control"
+                              accept="image/*"
+                              onChange={this.changeAnhHandler}
+                            /> 
+                                    <img style={{ width: "120px",marginLeft:"50px" }} src={`/images/products/${this.state.anh}`} alt="" />                         
+                          </div>
+                          <div className="form-group  col-md-3">
+                            <label htmlFor="username">Ảnh kèm trên: </label>
+                            <input
+                              name="anh2"
+                              type="file"
+                              className="form-control"
+                              accept="image/*"
+                              onChange={this.changeAnh2Handler}
+                            />  
+                      <img style={{ width: "120px",marginLeft:"50px" }} src={`/images/products/anhct/${this.state.anh2}`} alt="" />                         
+                                                  
+                          </div>
+                          <div className="form-group  col-md-3">
+                            <label htmlFor="username">Ảnh kèm dưới: </label>
+                            <input
+                              name="anh3"
+                              type="file"
+                              className="form-control"
+                              accept="image/*"
+                              onChange={this.changeAnh3Handler}
+                            />   
+                             <img style={{ width: "120px",marginLeft:"50px" }} src={`/images/products/anhct/${this.state.anh3}`} alt="" />                         
+                                             
+                          </div>
+                          <div className="form-group  col-md-3">
+                            <label htmlFor="username">Ảnh Chi Tiết Sản Phẩm: </label>
+                            <input
+                              name="detailanh"
+                              type="file"
+                              className="form-control"
+                              accept="image/*"
+                              onChange={this.changeDetailanhHandler}
+                            />     
+                             <img style={{ width: "120px",marginLeft:"50px" }} src={`/images/products/${this.state.detailanh}`} alt="" />                         
+                                                   
+                          </div>
+                              
+                         <div className="form-group col-md-6">
+                            <label htmlFor="username"> Hình ảnh liên quan của sản phẩm: <p style={{ float: "right", marginLeft: "10px" }}>(Giữ Ctrl để chọn nhiều ảnh)</p></label>
+                            <input
+                              name="image"
+                              type="file"
+                              placeholder="Giữ Ctrl để chọn nhiều ảnh"
+                              multiple
+                              className="form-control"
+                              accept="image/*"
+                              onChange={this.changeImageHandler}
                             />
-                          </div> */}
-                          {/* <div className="form-group">
-                            <label htmlFor="password">Nhóm sản phẩm:  </label>
-                            <select class="form-select"
-                              value={this.state.cateid}
-                              onChange={this.changeCateHandler}
-                            >
-                              {this.state.categorys.map((category) => (
-                                <option value={category.id}>{category.title}</option>
-                              ))}
-  
-  
-                            </select>
-                          </div> */}
-                          
-                       
+                                <div className="thumbs-wrap">
+                      {this.state.primg.map((primg) => (
+                   
+                           <img style={{ width: "110px",marginLeft:"5px" }}                 
+                          src={`/images/products/${primg.anh}`} title={primg.mau}
+                        />
+                    
+
+                      ))}
+                    </div>{" "}
+                          </div>
+
+                          <div className="form-group  col-md-3">
+                          <label htmlFor="password">Phụ kiện của sản phẩm:  </label>
+                        
+                          <select class="form-select"
+                            value={this.state.pkdikem}
+                            onChange={this.changePkdikemHandler}
+                          >
+                               <option value="0" selected>Không chọn</option>
+                            {this.state.products.map((products) => (
+                              <option value={products.id}>{products.ten}</option>
+                            ))}
+                          </select>
+
+                        </div>
+
+                        <div className="form-group  col-md-3">
+                          <label htmlFor="password">Loại sản phẩm:  </label>
+                          <select class="form-select"
+                            value={this.state.id_categorys}
+                            onChange={this.changeIdCateHandler}
+                          >
+                               <option value="0" selected>Không chọn</option>
+                            {this.state.categorys.map((category) => (
+                              <option value={category.id}>{category.ten}</option>
+                            ))}
+                          </select>
+                        </div>
+
+
+
+
                       </div>
   
   <center>
-                      <div className="form-group">
-                        <button
-                          style={{ border: "white" }}
-                          disabled={this.state.loading}
-                        >
-  
-                          <div style={{ display: "flex" }}
-                          >
-                            <div
-                              style={{ backgroundColor: "black", width: "80px", borderRadius: "15px", height: "35px" }}
-                            >
-                              <div style={{ color: "white", textAlign: "center", marginTop: "5px" }}><i class="far fa-save"></i> Lưu</div>
-                            </div>
-                            <div
-                              style={{ backgroundColor: "black", width: "80px", borderRadius: "15px", height: "35px", marginLeft: "5px" }}
-                              onClick={this.cancel.bind(this)}
-                            >
-                              <div style={{ color: "white", textAlign: "center", marginTop: "5px" }}><i class="fas fa-window-close"></i> Quay lại</div>
-                            </div>
-                          </div>
-  
-                        </button>
-                      </div>
+  <div className="form-group">
+                                        <button
+                                            style={{ border: "white" }}                                       
+                                        >
+
+                                            <div style={{ display: "flex" }}
+                                            >
+                                                <div
+                                                    style={{ backgroundColor: "black", width: "80px", borderRadius: "15px", height: "35px" }}
+                                                    onClick={this.saveProduct}
+                                               >
+                                                    <div style={{ color: "white", textAlign: "center", marginTop: "5px" }}><i class="far fa-save"></i> Lưu</div>
+                                                </div>
+                                                <div
+                                                    style={{ backgroundColor: "black", width: "80px", borderRadius: "15px", height: "35px", marginLeft: "5px" }}
+                                                    onClick={this.cancel.bind(this)}
+                                                >
+                                                    <div style={{ color: "white", textAlign: "center", marginTop: "5px" }}><i class="fas fa-window-close"></i> Hủy</div>
+                                                </div>
+                                            </div>
+
+                                        </button>
+                                    </div>
   </center>
-                      {this.state.message && (
-                        <div className="form-group">
-                          <div className="alert alert-danger" role="alert">
-                            {this.state.message}
-                          </div>
-                        </div>
-                      )}
-                      
+                   
                    </form>
                   </div>
                 </div>

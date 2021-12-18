@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Service from '../services/Service';
-
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 class FileTinTuc extends Component {
     constructor(props) {
         super(props)
@@ -26,7 +26,7 @@ this.state.tintuc.map(
                 <img src={`/images/tintuc/${tintuc.anh}`} className=" lazyloaded" alt={tintuc.ten} />
               </div>
               <div className="spl-item__content">
-                <p className="spl-item-title">{tintuc.ten}</p>
+                <p className="spl-item-title">{ReactHtmlParser(tintuc.ten)}</p>
                 <p className="spl-item-hour">{tintuc.ngaytao}</p>
               </div>
             </a>

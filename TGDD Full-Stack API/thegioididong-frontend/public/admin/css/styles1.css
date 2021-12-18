@@ -9180,7 +9180,14 @@ background-color: yellow;
     margin-right: 0.5rem !important;
     margin-left: 0.5rem !important;
   }
-
+.nutorder{
+  margin-top: 20px;
+}
+.nutorder2{
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
   .mx-lg-3 {
     margin-right: 1rem !important;
     margin-left: 1rem !important;

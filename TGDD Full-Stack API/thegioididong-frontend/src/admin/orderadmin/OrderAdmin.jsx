@@ -84,12 +84,12 @@ class OrderAdmin extends Component {
         const DataSet = [
             {
                 columns:[
-                    {title:"MÃ ĐƠN HÀNG"},
-                    {title:"NGÀY ĐẶT"},
-                    {title:"TÊN NGƯỜI MUA"},
-                    {title:"ĐỊA CHỈ"},
-                    {title:"THÀNH TIỀN"},
-                    {title:"TRẠNG THÁI"},
+                    {title:"MÃ ĐƠN HÀNG", width: {wpx: 100}},
+                    {title:"NGÀY ĐẶT", width: {wpx: 100}},
+                    {title:"TÊN NGƯỜI MUA", width: {wpx: 100}},
+                    {title:"ĐỊA CHỈ", width: {wpx: 240}},
+                    {title:"THÀNH TIỀN", width: {wpx: 100}},
+                    {title:"TRẠNG THÁI", width: {wpx: 100}},
                 ],
                 data:
                 (this.state.content.map((allproduct) =>[
@@ -108,6 +108,18 @@ class OrderAdmin extends Component {
                 <div id="layoutSidetop4">
                     <MenuAdmin />
                     <div id="layoutSidetop4_content">
+                        <div className="nutorder">
+                    
+                        <a >  <ExcelFile
+                        filename = "Danh sách đơn hàng"
+                        element = {<button type="button" className="btn btn-success">Xuất Ra Excel</button>}
+                        >
+<ExcelSheet dataSet={DataSet} name="Danh sách đơn hàng"/>
+
+
+                        </ExcelFile></a>
+                        </div>
+
                         <table class="table table-bordered donhangadmin" style={{ textAlign: "center" }}>
                             <thead>
                                 <tr style={{ textAlign: "center" }}>                                 
@@ -212,14 +224,7 @@ class OrderAdmin extends Component {
                                 ))}
                             </tbody>
                         </table>
-                        <ExcelFile
-                        filename = "Danh sách đơn hàng"
-                        element = {<button type="button" className="btn btn-success">Export file</button>}
-                        >
-<ExcelSheet dataSet={DataSet} name="Danh sách đơn hàng"/>
-
-
-                        </ExcelFile>
+                      
                         <center>
             <div class="form-row">
            <div  className={"page-item form-group " + this.state.disabled1} >

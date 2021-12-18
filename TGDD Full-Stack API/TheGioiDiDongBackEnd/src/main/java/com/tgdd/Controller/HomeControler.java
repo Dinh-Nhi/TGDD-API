@@ -49,6 +49,32 @@ public class HomeControler {
 	private DetailsReponsitory detailsReponsitory;
 	@Autowired
 	private ProductService productService;
+	
+	
+	@GetMapping("/phu-kien-lien-quan/{id}")
+	public List<Product> getPkById(@PathVariable Long id) {
+		Product product = productReponsitory.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Product not exist with id :" + id));
+		return productReponsitory.findByPkId(product.getId_categorys());
+
+	}
+
+
+	
+	
+	@GetMapping("/san-pham-cung-loai/{id}")
+	public List<Product> getCateById(@PathVariable Long id) {
+		Product product = productReponsitory.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Product not exist with id :" + id));
+		return productReponsitory.findByCateId(product.getId_categorys());
+
+	}
+	
+	
+	
+	
+	
+
 	@GetMapping("/products")
 	public List<Product> getpro() {
 		return productReponsitory.listproduct();
@@ -62,13 +88,7 @@ public class HomeControler {
 		return productReponsitory.listcatebyid(id_categorys);
 	}
 
-	@GetMapping("/san-pham-cung-loai/{id}")
-	public List<Product> getCateById(@PathVariable Long id) {
-		Product product = productReponsitory.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Product not exist with id :" + id));
-		return productReponsitory.findByCateId(product.getCategory().getId());
 
-	}
 	
 	@GetMapping("/products/images/{id}")
 	public List<Detailsimages> listDetailsimages(@PathVariable Long id) {
@@ -208,15 +228,6 @@ public class HomeControler {
 				.orElseThrow(() -> new ResourceNotFoundException("Tintuc not exist with id :" + id));
 		return tintucReponsitory.findTinCungLoaiById(tintuc.getTin_idsp());
 	}
-
-	@GetMapping("/phu-kien-lien-quan/{id}")
-	public List<Product> getPkById(@PathVariable Long id) {
-		Product product = productReponsitory.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Product not exist with id :" + id));
-		return productReponsitory.findByPkId(product.getCategory().getId());
-
-	}
-
 
 
 	@GetMapping("/products/{id}")

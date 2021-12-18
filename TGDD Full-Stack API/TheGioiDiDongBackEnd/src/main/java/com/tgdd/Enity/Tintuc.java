@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tintuc")
 public class Tintuc {
@@ -23,7 +25,7 @@ public class Tintuc {
 	String anh2;
 	String anh3;
 	Boolean tinchinh;
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	Date ngaytao;
 	Boolean tingame;
 	Integer tin_idsp;
@@ -110,6 +112,12 @@ public class Tintuc {
 	}
 	public void setTin_idsp(Integer tin_idsp) {
 		this.tin_idsp = tin_idsp;
+	}
+	@Override
+	public String toString() {
+		return "Tintuc [id=" + id + ", anh=" + anh + ", ten=" + ten + ", mieuta=" + mieuta + ", chitiet=" + chitiet
+				+ ", anh2=" + anh2 + ", anh3=" + anh3 + ", tinchinh=" + tinchinh + ", ngaytao=" + ngaytao + ", tingame="
+				+ tingame + ", tin_idsp=" + tin_idsp + "]";
 	}
 	
 	

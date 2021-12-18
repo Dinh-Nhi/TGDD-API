@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import NumberFormat from 'react-number-format';
 import Service from '../services/Service';
 import Head from '../share/Head';
-import Youtube from './App';
 import Header from './../share/Header';
 import Footer from '../share/Footer';
-
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 class TrangTinTuc extends Component {
   constructor(props) {
     super(props)
@@ -58,7 +57,7 @@ componentDidMount(){
       <div className="col1-big-img">
        <img src={`/images/tintuc/${tintucchinh.anh}`} className="img-bg" />
       </div>
-      <p className="col1-title">{tintucchinh.ten}<br/>
+      <p className="col1-title">{ReactHtmlParser(tintucchinh.ten)}<br/>
    
       </p>
                
@@ -114,12 +113,12 @@ componentDidMount(){
                <img src={`/images/tintuc/${tintuc.anh}`} width="225px" height="150px"/>         
       <div style={{marginLeft:"10px"}} class="game-box-main">
       <a href={"/chi-tiet-tin-tuc/"+tintuc.id}>
-     <h3 class="game-title">{tintuc.ten}</h3>
+     <h3 class="game-title">{ReactHtmlParser(tintuc.ten)}</h3>
      </a>
                           <div class="game-label">
                              <div className="spl-item__content">
                 
-                  <p className="spl-item-title">{tintuc.chitiet}</p>
+                  <p className="spl-item-title">{ReactHtmlParser(tintuc.chitiet)}</p>
                
                 </div>    
                           </div>

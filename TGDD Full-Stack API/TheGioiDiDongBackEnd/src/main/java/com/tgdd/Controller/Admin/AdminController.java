@@ -28,7 +28,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.tgdd.Enity.Category;
+import com.tgdd.Enity.Detailsimages;
 import com.tgdd.Enity.Order;
 import com.tgdd.Enity.OrderDetails;
 import com.tgdd.Enity.Product;
@@ -36,11 +38,12 @@ import com.tgdd.Enity.Tintuc;
 import com.tgdd.Enity.User;
 import com.tgdd.Exception.ResourceNotFoundException;
 import com.tgdd.Reponsitory.CategoryReponsitory;
+import com.tgdd.Reponsitory.DetailsimagesReponsitory;
+import com.tgdd.Reponsitory.OrderDetailRepository;
 import com.tgdd.Reponsitory.OrderReponsitory;
 import com.tgdd.Reponsitory.ProductReponsitory;
 import com.tgdd.Reponsitory.TintucReponsitory;
 import com.tgdd.Reponsitory.UserRepository;
-import com.tgdd.Reponsitory.OrderDetailRepository;
 
 
 @RestController
@@ -60,7 +63,8 @@ private OrderReponsitory orderReponsitory;
 private UserRepository userRepository;
 @Autowired
 private OrderDetailRepository orderDetailRepository;
-
+@Autowired
+private DetailsimagesReponsitory detailsimagesReponsitory;
 //lay-info-user-theo-id
 	@GetMapping("/info_user/{id}")
 	public Order getListOrderDetail(@PathVariable(value = "id") String id) {
@@ -100,24 +104,86 @@ public ResponseEntity<?> uploadImage(@RequestParam("imageFile") MultipartFile fi
 	}
 
 }
-
-
-
+////ad-updated-nhieu-hinh-anh
+//	@PutMapping("/product-images/{id}")
+//	public ResponseEntity<?> setDetailsimages(@PathVariable(value = "id") Long Id,
+//			@RequestBody List<Detailsimages> images) {
+//		Product product = productReponsitory.findById(Id)
+//				.orElseThrow(() -> new ResourceNotFoundException("Product not found for this id : " + Id));
+//		product.getDetailsimages().clear();
+//		for (Detailsimages news2 : images) {
+//			product.getDetailsimages().add(news2);
+//		}
+//		detailsimagesReponsitory.saveAll(images);
+//		return ResponseEntity.ok(new ApiResponse("Save productImage successfully", ""));
+//	}
+	
 //PRODUCT_ADMIN START
 @GetMapping("/all-product")
 Page<Product> getAllProduct(@RequestParam Optional<Integer> page, @RequestParam Optional<String> sortBy) {
 	return productReponsitory.findAllPro(PageRequest.of(page.orElse(1), 10, Sort.Direction.ASC, sortBy.orElse("id")));
 }
+//@PostMapping("/addProduct")
+//public Product createProduct(@RequestBody Product product) {
+//	List<Detailsimages> productimage = new ArrayList<Detailsimages>();
+//	product.setDetailsimages(new HashSet<Detailsimages>() {
+//		private static final long serialVersionUID = -5619441967802709713L;
+//
+//		{
+//			for (Detailsimages news2 : productimage) {
+//
+//				add(news2);
+//			}
+//
+//		}
+//	});
+//
+//	return productReponsitory.save(product);
+//}
+
+
+
+@PutMapping("/product/{id}")
+public ResponseEntity<Product> updateproducts(@PathVariable Long id, @RequestBody Product productDetails) {
+	Product product = productReponsitory.findById(id)
+			.orElseThrow(() -> new ResourceNotFoundException("Product not exits with id:" + id));
+	product.setId_categorys(productDetails.getId_categorys());
+	product.setAnh(productDetails.getAnh());
+	product.setTen(productDetails.getTen());
+	product.setGiaban(productDetails.getGiaban());
+	product.setPhantramgiam(productDetails.getPhantramgiam());
+	product.setAnh2(productDetails.getAnh2());
+	product.setDetailanh(productDetails.getDetailanh());
+	product.setNoibat(productDetails.getNoibat());
+	product.setNgaytao(productDetails.getNgaytao());
+	product.setAnh3(productDetails.getAnh3());
+	product.setChuongtrinh(productDetails.getChuongtrinh());
+	product.setQuatang(productDetails.getQuatang());
+	product.setPkdikem(productDetails.getPkdikem());
+	product.setYtbrivew(productDetails.getYtbrivew());
+	product.setGiagoc(productDetails.getGiagoc());
+	Product updateProduct = productReponsitory.save(product);
+	return ResponseEntity.ok(updateProduct);
+}
+@DeleteMapping("/product/{id}")
+public ResponseEntity<Map<String, Boolean>> deleteProduct(@PathVariable Long id){
+	Product product = productReponsitory.findById(id)
+			.orElseThrow(() -> new ResourceNotFoundException("Product not exist with id :" + id));
+	productReponsitory.delete(product);
+	Map<String, Boolean> response = new HashMap<>();
+	response.put("deleted", Boolean.TRUE);
+	return ResponseEntity.ok(response);
+}
+
+
+
+
+
+
 
 @GetMapping("/all-tintuc")
 Page<Tintuc> getAllTintuc(@RequestParam Optional<Integer> page, @RequestParam Optional<String> sortBy) {
 	return tintucReponsitory.findAllTinTuc(PageRequest.of(page.orElse(1), 10, Sort.Direction.ASC, sortBy.orElse("id")));
-}
-@GetMapping("/tintuc/{id}")
-public ResponseEntity<Tintuc> getTintucById(@PathVariable Long id) {
-	Tintuc tintuc = tintucReponsitory.findById(id)
-			.orElseThrow(() -> new ResourceNotFoundException("Tintuc not exits with id:" + id));
-	return ResponseEntity.ok(tintuc);
 }
 @PostMapping("/addTintuc")
 public Tintuc createTintuc(@RequestBody Tintuc tintuc) {

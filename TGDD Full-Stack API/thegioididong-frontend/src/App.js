@@ -23,7 +23,7 @@ import UsersAdmin from './admin/users/UsersAdmin';
 import AddUsers from './admin/users/AddUsers';
 import DetailOrder from './admin/orderadmin/DetailOrder';
 import Admin from './admin/Admin';
-import OrdersAdmin from './admin/orderadmin/OrdersAdmin';
+import AddProductsExcel from './admin/products/AddProductsExcel';
 function App() {
   return (
     <div>
@@ -48,6 +48,7 @@ function App() {
                           <Route path="/admin-add-categorys/:id" exact component={AddCategorys}></Route>
                           <Route path="/admin-add-tintuc/:id" exact component={AddTintuc}></Route>
                           <Route path="/admin-add-products/:id" exact component={AddProducts}></Route>
+                          <Route path="/admin-add-productsexcel" exact component={AddProductsExcel}></Route>
                           <Route path="/admin-order/page=:page" exact component={OrderAdmin}></Route>
                           <Route path="/order-details/:id" component={DetailOrder}></Route>
                           <Route path="/all-users-admin/page=:page" exact component={UsersAdmin}></Route>

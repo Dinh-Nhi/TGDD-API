@@ -23,7 +23,7 @@ class AuthService {
   }
   logoutAdmin() {
     localStorage.removeItem("user");
-    this.props.history.push("/login-admin");
+    this.props.history.push("/");
   }
 
   register(username, email, password,address,phone) {

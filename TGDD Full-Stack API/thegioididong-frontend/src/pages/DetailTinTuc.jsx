@@ -4,7 +4,7 @@ import Footer from '../share/Footer';
 import Head from '../share/Head';
 import Header from '../share/Header';
 import DanhGia from './DanhGia';
-
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 class DetailTinTuc extends Component {
     constructor(props) {
         super(props)
@@ -46,7 +46,7 @@ class DetailTinTuc extends Component {
     <div className="container" style={{maxWidth: '720px'}}>
     <div className="card mb-4">
       <div className="card-body">
-        <h1 class="titledetail" >{this.state.ttuc.ten}</h1>
+        <h1 class="titledetail" >{ReactHtmlParser(this.state.ttuc.ten)}</h1>
         <br />
         <br />
         <div class="form-row">
@@ -56,7 +56,8 @@ class DetailTinTuc extends Component {
         <div className="form-row">
      
                 <h6>
-        {this.state.ttuc.mieuta}</h6>
+                {ReactHtmlParser(this.state.ttuc.mieuta)}
+     </h6>
    
         </div>
         <div class="form-row">
@@ -66,13 +67,53 @@ class DetailTinTuc extends Component {
        <div className="form-row">
      
                 <h6>
-        {this.state.ttuc.chitiet}</h6>
+                {ReactHtmlParser(this.state.ttuc.chitiet)}
+       </h6>
    
         </div>
+
         <div class="form-row">
-        <img
-                src={`/images/tintuc/${this.state.ttuc.anh3 }`} width="100%"/>
-       </div>
+                                                      { <img
+                                                              src={`/images/tintuc/${this.state.ttuc.anh3 }`} width="100%"/>
+                                                   }
+                                                   
+                                                     </div>
+    
+
+                                          {/* {(() =>
+                                                 { if (this.state.ttuc.anh3 == '1')
+                                          {
+                                           
+                                          
+                                                }
+                                              
+                                                    else 
+                                                    {
+                                                      <div class="form-row">
+                                                      { <img
+                                                              src={`/images/tintuc/${this.state.ttuc.anh3 }`} width="100%"/>
+                                                   }
+                                                   
+                                                     </div>
+                                                        } })()} */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
        <div class="form-row">
        <DanhGia/>
        </div>
@@ -87,7 +128,9 @@ class DetailTinTuc extends Component {
       <div className="tempvideo">
         <img width={100} src={`/images/tintuc/${tintuclienquan.anh}`} />
       </div>
-      <h3>{tintuclienquan.ten}
+      <h3>
+      {ReactHtmlParser(tintuclienquan.ten)}
+      
       </h3>
       <span className="timepost">1 giờ trước</span>
     </a>

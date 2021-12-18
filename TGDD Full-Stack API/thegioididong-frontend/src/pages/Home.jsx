@@ -21,6 +21,7 @@ import FileTinGame from '../files/FileTinGame';
 import Head from '../share/Head';
 import Header from '../share/Header';
 import Footer from '../share/Footer';
+
 class Home extends Component {
 
 

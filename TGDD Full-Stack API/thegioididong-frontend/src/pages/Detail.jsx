@@ -9,6 +9,8 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import Head from '../share/Head';
 import Header from '../share/Header';
 import Footer from '../share/Footer';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import { empty } from 'uuidv4';
 if ((localStorage.getItem("cart_id")) == null) {
   var crypto = require("crypto");
   var id_order = crypto.randomBytes(3).toString("hex");
@@ -268,9 +270,23 @@ class Detail extends Component {
 
           <div className="container bodersp">
             <div className="row">
-              <div className="col-md-8">
-                <img src={`/images/products/${this.state.pro.detailanh}`} />
-              </div> {/* col.// */}
+            {(() =>
+                                         { if (this.state.pro.detailanh == 0)
+                                          {
+                                               return (
+                                                <div className="col-md-8">
+                                              
+                                              </div> 
+                                               ) }
+                                               else 
+                                               {
+                                                    return (
+                                                     
+                                                      <div className="col-md-8">
+                                                      <img src={`/images/products/${this.state.pro.detailanh}`} />
+                                                    </div>   
+                                                        ) } })()}
+           
               <aside className="col-md-4">
                 <table className="table table-bordered">
                   <tbody><tr> <th colSpan={2}>THÔNG SỐ KỸ THUẬT</th> </tr>
@@ -281,54 +297,76 @@ class Detail extends Component {
                           <tr> <td>{prdetal.chitiet1}</td><td>{prdetal.chitiet2}</td> </tr>
                       )}
                   </tbody></table>
+              </aside> 
+
+
+              
+            </div> 
+          </div>
+
+
+
+   
 
 
 
 
-              </aside> {/* col.// */}
-            </div> {/* row.// */}
-          </div> {/* container .//  */}
 
 
+          {(() =>
+                                         { if (this.state.pklienquan == null)
+                                          {
+                                               return (
+                                                <p class="related__ttl">
+                                                Phụ kiện thường mua cùng (đang cập nhật)
+                                                  
+                                            </p>
+                                               ) }
+                                               else 
+                                               {
+                                                    return (
+                                                     <div>
+                                                      <p class="related__ttl">
+                                                      Phụ kiện thường mua cùng
+                                                          <a href="/phu-kien/dtdd/iphone-12-pro-max">Xem tất cả</a>
+                                                  </p> 
+                                                   <div id="owl-promo" className="owl-carousel homepromo item2020 ">
+                                                   {
+                                                     this.state.pklienquan.map(
+                                                       pklienquan =>
+                                                         <div className="item" data-index={pklienquan.id}>
+                                                           <a href={(`/products/${pklienquan.id}`)} className="vertion2020 large">
+                                                             <div className="heightlabel">
+                                                               <label className="installment">{pklienquan.chuongtrinh}</label>
+                                                             </div> <img width={180} height={180} data-original={`/images/products/${pklienquan.anh}`} className="lazy" alt={pklienquan.ten} />
+                                                             <aside className="result-label temp1">
+                                                               <img src={`/images/products/anhct/giam-gia.png`} width={20} height={20} alt="Giảm sốc" loading="lazy" className="lazy imgresult" /><span className="text">Giảm sốc</span>
+                                                             </aside>
+                                                             <h3>{pklienquan.ten}</h3>
+                                       
+                                       
+                                                             <div className="price">
+                                                               <strong><NumberFormat value={pklienquan.giaban - (pklienquan.giaban * pklienquan.phantramgiam / 100)} displayType={'text'} thousandSeparator={true} />₫</strong> <span> <NumberFormat value={pklienquan.giaban} displayType={'text'} thousandSeparator={true} />₫</span> <i>-{pklienquan.phantramgiam}%</i>
+                                                             </div>
+                                                             <div class="ratingresult"><i class="icontgdd-ystar"></i><i class="icontgdd-ystar"></i><i class="icontgdd-ystar"></i><i class="icontgdd-ystar"></i><i class="icontgdd-gstar"></i><span>72 đánh giá</span></div>
+                                                             <div className="promo noimage">
+                                                               <p>
+                                                                 <b>{pklienquan.quatang}</b>
+                                                               </p>
+                                                             </div>
+                                                             <img width="60" height="60" alt="icon" class="icon-imgNew cate42 left lazyloaded" src={`/images/products/anhct/${pklienquan.anh3}`} />
+                                                             <img data-original={`/images/products/anhct/${pklienquan.anh2}`}
+                                                               width={45} height={45} alt="icon" className="icon-imgNew cate44 lazy left" />
+                                                           </a>
+                                                         </div>
+                                                     )}  
+                                                     </div>
+                                       </div>
+                                                        ) } })()}
+      
 
 
-
-
-          <p class="related__ttl">
-            Phụ kiện thường mua cùng
-                <a href="/phu-kien/dtdd/iphone-12-pro-max">Xem tất cả</a>
-        </p>
-          <div id="owl-promo" className="owl-carousel homepromo item2020 ">
-            {
-              this.state.pklienquan.map(
-                pklienquan =>
-                  <div className="item" data-index={pklienquan.id}>
-                    <a href={(`/products/${pklienquan.id}`)} className="vertion2020 large">
-                      <div className="heightlabel">
-                        <label className="installment">{pklienquan.chuongtrinh}</label>
-                      </div> <img width={180} height={180} data-original={`/images/products/${pklienquan.anh}`} className="lazy" alt={pklienquan.ten} />
-                      <aside className="result-label temp1">
-                        <img src={`/images/products/anhct/giam-gia.png`} width={20} height={20} alt="Giảm sốc" loading="lazy" className="lazy imgresult" /><span className="text">Giảm sốc</span>
-                      </aside>
-                      <h3>{pklienquan.ten}</h3>
-
-
-                      <div className="price">
-                        <strong><NumberFormat value={pklienquan.giaban - (pklienquan.giaban * pklienquan.phantramgiam / 100)} displayType={'text'} thousandSeparator={true} />₫</strong> <span> <NumberFormat value={pklienquan.giaban} displayType={'text'} thousandSeparator={true} />₫</span> <i>-{pklienquan.phantramgiam}%</i>
-                      </div>
-                      <div class="ratingresult"><i class="icontgdd-ystar"></i><i class="icontgdd-ystar"></i><i class="icontgdd-ystar"></i><i class="icontgdd-ystar"></i><i class="icontgdd-gstar"></i><span>72 đánh giá</span></div>
-                      <div className="promo noimage">
-                        <p>
-                          <b>{pklienquan.quatang}</b>
-                        </p>
-                      </div>
-                      <img width="60" height="60" alt="icon" class="icon-imgNew cate42 left lazyloaded" src={`/images/products/anhct/${pklienquan.anh3}`} />
-                      <img data-original={`/images/products/anhct/${pklienquan.anh2}`}
-                        width={45} height={45} alt="icon" className="icon-imgNew cate44 lazy left" />
-                    </a>
-                  </div>
-              )}  </div>
-
+         
 
 
 
@@ -336,7 +374,24 @@ class Detail extends Component {
             <div className="row">
               <div className="col-md-8">
 
-                <iframe width="100%" height="100%" src={this.state.pro.ytbrivew} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+              {(() =>
+                                         { if (this.state.pro.ytbrivew == 0)
+                                          {
+                                               return (
+                                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZUAABM8rh6o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+             
+                                               ) }
+                                               else 
+                                               {
+                                                    return (
+                                                      <iframe width="100%" height="100%" src={this.state.pro.ytbrivew} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              
+                                                        ) } })()}
+               
+           
+           
+               
               </div> {/* col.// */}
               <aside className="col-md-4">
                 <div className="box">
@@ -348,7 +403,7 @@ class Detail extends Component {
                         <article className="media mb-3">
                           <a href="#"><img className="img-sm mr-3" src={`/images/tintuc/${tintuc.anh}`} /></a>
                           <div className="media-body">
-                            <p className="mb-2"> {tintuc.ten}</p>
+                            <p className="mb-2"> {ReactHtmlParser(tintuc.ten)}</p>
                           </div>
                         </article>
                     )}
@@ -358,7 +413,7 @@ class Detail extends Component {
               </aside> {/* col.// */}
             </div> 
           
-             <div className="row">
+             {/* <div className="row">
              
                <div className="col-md-4">
                <DanhGia/>
@@ -446,8 +501,8 @@ class Detail extends Component {
               
               
                </div>
-               </div>
-          </div> {/* container .//  */}
+               </div> */}
+          </div> 
 
 
 

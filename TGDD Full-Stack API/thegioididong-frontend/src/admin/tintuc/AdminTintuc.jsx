@@ -58,7 +58,7 @@ class AdminTintuc extends Component {
       }
       componentDidMount() {
         const user = authService.getCurrentUser();
-    
+      
         if (user) {
           this.setState({
             currentUser: user,
@@ -66,16 +66,13 @@ class AdminTintuc extends Component {
           });
         }
         if (user !== null) {
-      
-          if (user.roles.includes("ROLE_ADMIN") === false) {
-            authService.logout();
-            this.props.history.push("/login-admin");
-            
-           
+        
+          if (user.roles.includes("ROLE_USER") === true) {
+            this.props.history.push("/");
           }
        
         }else{
-          this.props.history.push("/login-admin");
+          this.props.history.push("/");
         }
         this.changcurrentPage(this.state.currentPage);
         this.findAll(this.state.currentPage);

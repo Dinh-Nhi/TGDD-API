@@ -11,12 +11,17 @@ class DetailOrder extends Component {
         super(props);
 
         this.state = {
-            id: this.props.match.params.id,     
+            id: this.props.match.params.id,  
+            fullname:'',
+            phone:'',
+            address:'',
+            note:'',
             status: ' ',
             list_product: [],
             info: "",
-        }
-        this.changeStatusHandler = this.changeStatusHandler.bind(this);
+        }   
+     
+       this.changeStatusHandler = this.changeStatusHandler.bind(this);
         this.saveOrder = this.saveOrder.bind(this);
     }
 
@@ -24,7 +29,11 @@ class DetailOrder extends Component {
         OrdersService.getInfoUserById(this.state.id).then( (res) =>{
             let order = res.data;
             this.setState({   
-                status:order.status
+                fullname: order.fullname,
+                phone: order.phone,
+                address:order.address,
+                note: order.note,
+                status:order.status,
             });
         });
 
@@ -179,11 +188,11 @@ class DetailOrder extends Component {
                                                     </div>
                                                   
                                                         <div className="title">
-                                                          <div>Họ tên khách hàng:{this.state.fullname} </div>
-                                                            <div>Số điện thoại:{this.state.phone} </div>
-                                                            <div>Địa chỉ:{this.state.address} </div>
-                                                            <div>Ghi chú:{this.state.note}</div>
-                                                            <div>Trạng thái:{this.state.status}</div>
+                                                          <div>Họ tên khách hàng:   {this.state.fullname} </div>
+                                                            <div>Số điện thoại:  {this.state.phone} </div>
+                                                            <div>Địa chỉ:  {this.state.address} </div>
+                                                            <div>Ghi chú:  {this.state.note}</div>
+                                                            <div>Trạng thái: {this.state.status}</div>
                                                         </div>
                                                    
             <div className="giatienadmin">
