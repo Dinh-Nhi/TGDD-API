@@ -1,401 +1,0 @@
-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
-PGDMP     $    
-                y            thegioididong    12.6    12.6 [    •           0    0    ENCODING    ENCODING        SET client_encoding = 'UTF8';
-                      false            –           0    0 
-   STDSTRINGS 
-   STDSTRINGS     (   SET standard_conforming_strings = 'on';
-                      false            —           0    0 
-   SEARCHPATH 
-   SEARCHPATH     8   SELECT pg_catalog.set_config('search_path', '', false);
-                      false            ˜           1262    124054    thegioididong    DATABASE     �   CREATE DATABASE thegioididong WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252';
-    DROP DATABASE thegioididong;
-                postgres    false            Ê            1259    124055 	   categorys    TABLE     ï   CREATE TABLE public.categorys (
-    id integer NOT NULL,
-    ten character varying(255) NOT NULL,
-    iclass character varying(100),
-    title character varying(100) NOT NULL,
-    icon character varying(50) NOT NULL,
-    status boolean
-);
-    DROP TABLE public.categorys;
-       public         heap    postgres    false            Ë            1259    124062    details    TABLE     ¥   CREATE TABLE public.details (
-    id integer NOT NULL,
-    id_products integer NOT NULL,
-    chitiet1 character varying(255),
-    chitiet2 character varying(255)
-);
-    DROP TABLE public.details;
-       public         heap    postgres    false            Ì            1259    124068    details_id_seq    SEQUENCE     †   CREATE SEQUENCE public.details_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
- %   DROP SEQUENCE public.details_id_seq;
-       public          postgres    false    203            ™           0    0    details_id_seq    SEQUENCE OWNED BY     A   ALTER SEQUENCE public.details_id_seq OWNED BY public.details.id;
-          public          postgres    false    204            Í            1259    124070    detailsimages    TABLE     œ   CREATE TABLE public.detailsimages (
-    id integer NOT NULL,
-    id_products integer NOT NULL,
-    anh character varying(255),
-    mau character varying
-);
- !   DROP TABLE public.detailsimages;
-       public         heap    postgres    false            Î            1259    124076    detailsimages_id_seq    SEQUENCE     Œ   CREATE SEQUENCE public.detailsimages_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
- +   DROP SEQUENCE public.detailsimages_id_seq;
-       public          postgres    false    205            š           0    0    detailsimages_id_seq    SEQUENCE OWNED BY     M   ALTER SEQUENCE public.detailsimages_id_seq OWNED BY public.detailsimages.id;
-          public          postgres    false    206            Ï            1259    124078    menus_id_seq    SEQUENCE     „   CREATE SEQUENCE public.menus_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
- #   DROP SEQUENCE public.menus_id_seq;
-       public          postgres    false    202            ›           0    0    menus_id_seq    SEQUENCE OWNED BY     A   ALTER SEQUENCE public.menus_id_seq OWNED BY public.categorys.id;
-          public          postgres    false    207            Þ            1259    124384    orderdetais    TABLE       CREATE TABLE public.orderdetais (
-    id_detail_order bigint NOT NULL,
-    anh character varying(255),
-    giaban bigint,
-    id bigint,
-    id_order character varying(255),
-    mau character varying(255),
-    quantity bigint,
-    ten character varying(255)
-);
-    DROP TABLE public.orderdetais;
-       public         heap    postgres    false            Ý            1259    124382    orderdetais_id_detail_order_seq    SEQUENCE     ˆ   CREATE SEQUENCE public.orderdetais_id_detail_order_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
- 6   DROP SEQUENCE public.orderdetais_id_detail_order_seq;
-       public          postgres    false    222            œ           0    0    orderdetais_id_detail_order_seq    SEQUENCE OWNED BY     c   ALTER SEQUENCE public.orderdetais_id_detail_order_seq OWNED BY public.orderdetais.id_detail_order;
-          public          postgres    false    221            à            1259    124395    orders    TABLE       CREATE TABLE public.orders (
-    id bigint NOT NULL,
-    address character varying(255),
-    date character varying(255),
-    fullname character varying(255),
-    id_order character varying(255),
-    note character varying(255),
-    phone character varying(255),
-    user_id bigint
-);
-    DROP TABLE public.orders;
-       public         heap    postgres    false            ß            1259    124393    orders_id_seq    SEQUENCE     v   CREATE SEQUENCE public.orders_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
- $   DROP SEQUENCE public.orders_id_seq;
-       public          postgres    false    224            �           0    0    orders_id_seq    SEQUENCE OWNED BY     ?   ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
-          public          postgres    false    223            Ð            1259    124080    products    TABLE     †  CREATE TABLE public.products (
-    id integer NOT NULL,
-    id_categorys integer NOT NULL,
-    anh character varying(255) NOT NULL,
-    ten character varying(255) NOT NULL,
-    giaban double precision,
-    phantramgiam integer DEFAULT 0,
-    anh2 character varying(255) DEFAULT NULL::character varying,
-    detailanh character varying(50) DEFAULT NULL::character varying,
-    noibat boolean DEFAULT false NOT NULL,
-    ngaytao timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    anh3 character varying(255),
-    chuongtrinh character varying,
-    quatang character varying,
-    pkdikem integer DEFAULT 0,
-    ytbrivew character varying
-);
-    DROP TABLE public.products;
-       public         heap    postgres    false            Ñ            1259    124106    products_id_seq    SEQUENCE     ‡   CREATE SEQUENCE public.products_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
- &   DROP SEQUENCE public.products_id_seq;
-       public          postgres    false    208            ž           0    0    products_id_seq    SEQUENCE OWNED BY     C   ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
-          public          postgres    false    209            ×            1259    124144    roles    TABLE     W   CREATE TABLE public.roles (
-    id integer NOT NULL,
-    name character varying(20)
-);
-    DROP TABLE public.roles;
-       public         heap    postgres    false            Ö            1259    124142    roles_id_seq    SEQUENCE     „   CREATE SEQUENCE public.roles_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
- #   DROP SEQUENCE public.roles_id_seq;
-       public          postgres    false    215            Ÿ           0    0    roles_id_seq    SEQUENCE OWNED BY     =   ALTER SEQUENCE public.roles_id_seq OWNED BY public.roles.id;
-          public          postgres    false    214            Ò            1259    124108 	   saleslide    TABLE     ¥   CREATE TABLE public.saleslide (
-    id integer NOT NULL,
-    ten character varying(50) NOT NULL,
-    mieuta character varying(50) DEFAULT NULL::character varying
-);
-    DROP TABLE public.saleslide;
-       public         heap    postgres    false            Ó            1259    124113    saleslide_id_seq    SEQUENCE     ˆ   CREATE SEQUENCE public.saleslide_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
- '   DROP SEQUENCE public.saleslide_id_seq;
-       public          postgres    false    210                        0    0    saleslide_id_seq    SEQUENCE OWNED BY     E   ALTER SEQUENCE public.saleslide_id_seq OWNED BY public.saleslide.id;
-          public          postgres    false    211            Ô            1259    124115    slides    TABLE     a   CREATE TABLE public.slides (
-    id integer NOT NULL,
-    anh character varying(255) NOT NULL
-);
-    DROP TABLE public.slides;
-       public         heap    postgres    false            Õ            1259    124121    slides_id_seq    SEQUENCE     …   CREATE SEQUENCE public.slides_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
- $   DROP SEQUENCE public.slides_id_seq;
-       public          postgres    false    212            ¡           0    0    slides_id_seq    SEQUENCE OWNED BY     ?   ALTER SEQUENCE public.slides_id_seq OWNED BY public.slides.id;
-          public          postgres    false    213            Ù            1259    124152    tintuc    TABLE     o  CREATE TABLE public.tintuc (
-    id bigint NOT NULL,
-    anh character varying(255),
-    anh2 character varying(255),
-    anh3 character varying(255),
-    chitiet character varying,
-    mieuta character varying,
-    ten character varying(255),
-    tinchinh boolean DEFAULT false,
-    ngaytao date,
-    tingame boolean DEFAULT false,
-    tin_idsp integer DEFAULT 0
-);
-    DROP TABLE public.tintuc;
-       public         heap    postgres    false            Ø            1259    124150    tintuc_id_seq    SEQUENCE     v   CREATE SEQUENCE public.tintuc_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
- $   DROP SEQUENCE public.tintuc_id_seq;
-       public          postgres    false    217            ¢           0    0    tintuc_id_seq    SEQUENCE OWNED BY     ?   ALTER SEQUENCE public.tintuc_id_seq OWNED BY public.tintuc.id;
-          public          postgres    false    216            Ú            1259    124161 
-   user_roles    TABLE     ^   CREATE TABLE public.user_roles (
-    user_id bigint NOT NULL,
-    role_id integer NOT NULL
-);
-    DROP TABLE public.user_roles;
-       public         heap    postgres    false            Ü            1259    124168    users    TABLE     ä   CREATE TABLE public.users (
-    id bigint NOT NULL,
-    address character varying(50),
-    email character varying(50),
-    password character varying(120),
-    phone character varying(50),
-    username character varying(20)
-);
-    DROP TABLE public.users;
-       public         heap    postgres    false            Û            1259    124166    users_id_seq    SEQUENCE     u   CREATE SEQUENCE public.users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
- #   DROP SEQUENCE public.users_id_seq;
-       public          postgres    false    220            £           0    0    users_id_seq    SEQUENCE OWNED BY     =   ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
-          public          postgres    false    219            Ç
-           2604    124123    categorys id    DEFAULT     h   ALTER TABLE ONLY public.categorys ALTER COLUMN id SET DEFAULT nextval('public.menus_id_seq'::regclass);
- ;   ALTER TABLE public.categorys ALTER COLUMN id DROP DEFAULT;
-       public          postgres    false    207    202            È
-           2604    124124 
-   details id    DEFAULT     h   ALTER TABLE ONLY public.details ALTER COLUMN id SET DEFAULT nextval('public.details_id_seq'::regclass);
- 9   ALTER TABLE public.details ALTER COLUMN id DROP DEFAULT;
-       public          postgres    false    204    203            É
-           2604    124125    detailsimages id    DEFAULT     t   ALTER TABLE ONLY public.detailsimages ALTER COLUMN id SET DEFAULT nextval('public.detailsimages_id_seq'::regclass);
- ?   ALTER TABLE public.detailsimages ALTER COLUMN id DROP DEFAULT;
-       public          postgres    false    206    205            Ú
-           2604    124387    orderdetais id_detail_order    DEFAULT     Š   ALTER TABLE ONLY public.orderdetais ALTER COLUMN id_detail_order SET DEFAULT nextval('public.orderdetais_id_detail_order_seq'::regclass);
- J   ALTER TABLE public.orderdetais ALTER COLUMN id_detail_order DROP DEFAULT;
-       public          postgres    false    222    221    222            Û
-           2604    124398 	   orders id    DEFAULT     f   ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
- 8   ALTER TABLE public.orders ALTER COLUMN id DROP DEFAULT;
-       public          postgres    false    223    224    224            Î
-           2604    124126    products id    DEFAULT     j   ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
- :   ALTER TABLE public.products ALTER COLUMN id DROP DEFAULT;
-       public          postgres    false    209    208            Ô
-           2604    124147    roles id    DEFAULT     d   ALTER TABLE ONLY public.roles ALTER COLUMN id SET DEFAULT nextval('public.roles_id_seq'::regclass);
- 7   ALTER TABLE public.roles ALTER COLUMN id DROP DEFAULT;
-       public          postgres    false    215    214    215            Ò
-           2604    124127    saleslide id    DEFAULT     l   ALTER TABLE ONLY public.saleslide ALTER COLUMN id SET DEFAULT nextval('public.saleslide_id_seq'::regclass);
- ;   ALTER TABLE public.saleslide ALTER COLUMN id DROP DEFAULT;
-       public          postgres    false    211    210            Ó
-           2604    124128 	   slides id    DEFAULT     f   ALTER TABLE ONLY public.slides ALTER COLUMN id SET DEFAULT nextval('public.slides_id_seq'::regclass);
- 8   ALTER TABLE public.slides ALTER COLUMN id DROP DEFAULT;
-       public          postgres    false    213    212            Õ
-           2604    124155 	   tintuc id    DEFAULT     f   ALTER TABLE ONLY public.tintuc ALTER COLUMN id SET DEFAULT nextval('public.tintuc_id_seq'::regclass);
- 8   ALTER TABLE public.tintuc ALTER COLUMN id DROP DEFAULT;
-       public          postgres    false    217    216    217            Ù
-           2604    124171    users id    DEFAULT     d   ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
- 7   ALTER TABLE public.users ALTER COLUMN id DROP DEFAULT;
-       public          postgres    false    220    219    220            |          0    124055 	   categorys 
-   TABLE DATA           I   COPY public.categorys (id, ten, iclass, title, icon, status) FROM stdin;
-    public          postgres    false    202   öf       }          0    124062    details 
-   TABLE DATA           F   COPY public.details (id, id_products, chitiet1, chitiet2) FROM stdin;
-    public          postgres    false    203   1h                 0    124070    detailsimages 
-   TABLE DATA           B   COPY public.detailsimages (id, id_products, anh, mau) FROM stdin;
-    public          postgres    false    205   ÷i       �          0    124384    orderdetais 
-   TABLE DATA           e   COPY public.orderdetais (id_detail_order, anh, giaban, id, id_order, mau, quantity, ten) FROM stdin;
-    public          postgres    false    222   Ñj       ’          0    124395    orders 
-   TABLE DATA           ]   COPY public.orders (id, address, date, fullname, id_order, note, phone, user_id) FROM stdin;
-    public          postgres    false    224   îj       ‚          0    124080    products 
-   TABLE DATA           ¥   COPY public.products (id, id_categorys, anh, ten, giaban, phantramgiam, anh2, detailanh, noibat, ngaytao, anh3, chuongtrinh, quatang, pkdikem, ytbrivew) FROM stdin;
-    public          postgres    false    208   k       ‰          0    124144    roles 
-   TABLE DATA           )   COPY public.roles (id, name) FROM stdin;
-    public          postgres    false    215   Ös       „          0    124108 	   saleslide 
-   TABLE DATA           4   COPY public.saleslide (id, ten, mieuta) FROM stdin;
-    public          postgres    false    210   t       †          0    124115    slides 
-   TABLE DATA           )   COPY public.slides (id, anh) FROM stdin;
-    public          postgres    false    212   "u       ‹          0    124152    tintuc 
-   TABLE DATA           q   COPY public.tintuc (id, anh, anh2, anh3, chitiet, mieuta, ten, tinchinh, ngaytao, tingame, tin_idsp) FROM stdin;
-    public          postgres    false    217   gu       Œ          0    124161 
-   user_roles 
-   TABLE DATA           6   COPY public.user_roles (user_id, role_id) FROM stdin;
-    public          postgres    false    218   X…       Ž          0    124168    users 
-   TABLE DATA           N   COPY public.users (id, address, email, password, phone, username) FROM stdin;
-    public          postgres    false    220   ‚…       ¤           0    0    details_id_seq    SEQUENCE SET     =   SELECT pg_catalog.setval('public.details_id_seq', 19, true);
-          public          postgres    false    204            ¥           0    0    detailsimages_id_seq    SEQUENCE SET     B   SELECT pg_catalog.setval('public.detailsimages_id_seq', 1, true);
-          public          postgres    false    206            ¦           0    0    menus_id_seq    SEQUENCE SET     ;   SELECT pg_catalog.setval('public.menus_id_seq', 1, false);
-          public          postgres    false    207            §           0    0    orderdetais_id_detail_order_seq    SEQUENCE SET     N   SELECT pg_catalog.setval('public.orderdetais_id_detail_order_seq', 1, false);
-          public          postgres    false    221            ¨           0    0    orders_id_seq    SEQUENCE SET     <   SELECT pg_catalog.setval('public.orders_id_seq', 1, false);
-          public          postgres    false    223            ©           0    0    products_id_seq    SEQUENCE SET     >   SELECT pg_catalog.setval('public.products_id_seq', 16, true);
-          public          postgres    false    209            ª           0    0    roles_id_seq    SEQUENCE SET     :   SELECT pg_catalog.setval('public.roles_id_seq', 3, true);
-          public          postgres    false    214            «           0    0    saleslide_id_seq    SEQUENCE SET     >   SELECT pg_catalog.setval('public.saleslide_id_seq', 8, true);
-          public          postgres    false    211            ¬           0    0    slides_id_seq    SEQUENCE SET     ;   SELECT pg_catalog.setval('public.slides_id_seq', 9, true);
-          public          postgres    false    213            ­           0    0    tintuc_id_seq    SEQUENCE SET     ;   SELECT pg_catalog.setval('public.tintuc_id_seq', 7, true);
-          public          postgres    false    216            ®           0    0    users_id_seq    SEQUENCE SET     ;   SELECT pg_catalog.setval('public.users_id_seq', 17, true);
-          public          postgres    false    219            ß
-           2606    124130    details details_pkey 
-   CONSTRAINT     R   ALTER TABLE ONLY public.details
-    ADD CONSTRAINT details_pkey PRIMARY KEY (id);
- >   ALTER TABLE ONLY public.details DROP CONSTRAINT details_pkey;
-       public            postgres    false    203            á
-           2606    124132     detailsimages detailsimages_pkey 
-   CONSTRAINT     ^   ALTER TABLE ONLY public.detailsimages
-    ADD CONSTRAINT detailsimages_pkey PRIMARY KEY (id);
- J   ALTER TABLE ONLY public.detailsimages DROP CONSTRAINT detailsimages_pkey;
-       public            postgres    false    205            Ý
-           2606    124134    categorys menus_pkey 
-   CONSTRAINT     R   ALTER TABLE ONLY public.categorys
-    ADD CONSTRAINT menus_pkey PRIMARY KEY (id);
- >   ALTER TABLE ONLY public.categorys DROP CONSTRAINT menus_pkey;
-       public            postgres    false    202            ÷
-           2606    124392    orderdetais orderdetais_pkey 
-   CONSTRAINT     g   ALTER TABLE ONLY public.orderdetais
-    ADD CONSTRAINT orderdetais_pkey PRIMARY KEY (id_detail_order);
- F   ALTER TABLE ONLY public.orderdetais DROP CONSTRAINT orderdetais_pkey;
-       public            postgres    false    222            ù
-           2606    124403    orders orders_pkey 
-   CONSTRAINT     P   ALTER TABLE ONLY public.orders
-    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
- <   ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_pkey;
-       public            postgres    false    224            ã
-           2606    124136    products products_pkey 
-   CONSTRAINT     T   ALTER TABLE ONLY public.products
-    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
- @   ALTER TABLE ONLY public.products DROP CONSTRAINT products_pkey;
-       public            postgres    false    208            é
-           2606    124149    roles roles_pkey 
-   CONSTRAINT     N   ALTER TABLE ONLY public.roles
-    ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
- :   ALTER TABLE ONLY public.roles DROP CONSTRAINT roles_pkey;
-       public            postgres    false    215            å
-           2606    124138    saleslide saleslide_pkey 
-   CONSTRAINT     V   ALTER TABLE ONLY public.saleslide
-    ADD CONSTRAINT saleslide_pkey PRIMARY KEY (id);
- B   ALTER TABLE ONLY public.saleslide DROP CONSTRAINT saleslide_pkey;
-       public            postgres    false    210            ç
-           2606    124140    slides slides_pkey 
-   CONSTRAINT     P   ALTER TABLE ONLY public.slides
-    ADD CONSTRAINT slides_pkey PRIMARY KEY (id);
- <   ALTER TABLE ONLY public.slides DROP CONSTRAINT slides_pkey;
-       public            postgres    false    212            ë
-           2606    124160    tintuc tintuc_pkey 
-   CONSTRAINT     P   ALTER TABLE ONLY public.tintuc
-    ADD CONSTRAINT tintuc_pkey PRIMARY KEY (id);
- <   ALTER TABLE ONLY public.tintuc DROP CONSTRAINT tintuc_pkey;
-       public            postgres    false    217            ï
-           2606    124177 !   users uk6dotkott2kjsp8vw4d0m25fb7 
-   CONSTRAINT     ]   ALTER TABLE ONLY public.users
-    ADD CONSTRAINT uk6dotkott2kjsp8vw4d0m25fb7 UNIQUE (email);
- K   ALTER TABLE ONLY public.users DROP CONSTRAINT uk6dotkott2kjsp8vw4d0m25fb7;
-       public            postgres    false    220            ñ
-           2606    124179 !   users ukdu5v5sr43g5bfnji4vb8hg5s3 
-   CONSTRAINT     ]   ALTER TABLE ONLY public.users
-    ADD CONSTRAINT ukdu5v5sr43g5bfnji4vb8hg5s3 UNIQUE (phone);
- K   ALTER TABLE ONLY public.users DROP CONSTRAINT ukdu5v5sr43g5bfnji4vb8hg5s3;
-       public            postgres    false    220            ó
-           2606    124175 !   users ukr43af9ap4edm43mmtq01oddj6 
-   CONSTRAINT     `   ALTER TABLE ONLY public.users
-    ADD CONSTRAINT ukr43af9ap4edm43mmtq01oddj6 UNIQUE (username);
- K   ALTER TABLE ONLY public.users DROP CONSTRAINT ukr43af9ap4edm43mmtq01oddj6;
-       public            postgres    false    220            í
-           2606    124165    user_roles user_roles_pkey 
-   CONSTRAINT     f   ALTER TABLE ONLY public.user_roles
-    ADD CONSTRAINT user_roles_pkey PRIMARY KEY (user_id, role_id);
- D   ALTER TABLE ONLY public.user_roles DROP CONSTRAINT user_roles_pkey;
-       public            postgres    false    218    218            õ
-           2606    124173    users users_pkey 
-   CONSTRAINT     N   ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
- :   ALTER TABLE ONLY public.users DROP CONSTRAINT users_pkey;
-       public            postgres    false    220            ü
-           2606    124180 &   user_roles fkh8ciramu9cc9q3qcqiv4ue8a6    FK CONSTRAINT     …   ALTER TABLE ONLY public.user_roles
-    ADD CONSTRAINT fkh8ciramu9cc9q3qcqiv4ue8a6 FOREIGN KEY (role_id) REFERENCES public.roles(id);
- P   ALTER TABLE ONLY public.user_roles DROP CONSTRAINT fkh8ciramu9cc9q3qcqiv4ue8a6;
-       public          postgres    false    215    2793    218            ý
-           2606    124185 &   user_roles fkhfh9dx7w3ubf1co1vdev94g3f    FK CONSTRAINT     …   ALTER TABLE ONLY public.user_roles
-    ADD CONSTRAINT fkhfh9dx7w3ubf1co1vdev94g3f FOREIGN KEY (user_id) REFERENCES public.users(id);
- P   ALTER TABLE ONLY public.user_roles DROP CONSTRAINT fkhfh9dx7w3ubf1co1vdev94g3f;
-       public          postgres    false    220    2805    218            ú
-           2606    124218 )   detailsimages fkj9xmi54fbkhloptvclms4g6bc    FK CONSTRAINT     �   ALTER TABLE ONLY public.detailsimages
-    ADD CONSTRAINT fkj9xmi54fbkhloptvclms4g6bc FOREIGN KEY (id_products) REFERENCES public.products(id);
- S   ALTER TABLE ONLY public.detailsimages DROP CONSTRAINT fkj9xmi54fbkhloptvclms4g6bc;
-       public          postgres    false    205    2787    208            û
-           2606    124223 $   products fkpnd078rlght6wqcf5hxvxacl9    FK CONSTRAINT     Œ   ALTER TABLE ONLY public.products
-    ADD CONSTRAINT fkpnd078rlght6wqcf5hxvxacl9 FOREIGN KEY (id_categorys) REFERENCES public.categorys(id);
- N   ALTER TABLE ONLY public.products DROP CONSTRAINT fkpnd078rlght6wqcf5hxvxacl9;
-       public          postgres    false    208    2781    202            |   +  xœ}P;NÃ@­gO1p�øs>B"ešõï(Þ]+9-¢  £ŠK‡ƒìM²‰�	V š�7ï½™}»°x WÝdeÝ¼$Ð6¤,éÃ.f®z2i€…–Î•5	Pd§q<he,öàLælsÈšr^—SäúÃ(¼«ËH!Ëi€-§“·dû0”a–0pS6ä¡›¿®Ö·“NÛö,üÕ®z4)*_üé®z&ä‰4)\ËB‘5·’#õ­3ýÅgqØ×ÔŸþ­É(X§±Õ÷‡ÓÙ~ûÁ¥'½áé:e]´ý¸I}1û;ý|“Øü½f½psu3¦ÄøµÇMžÑ×;¦T—8qó
-´h9�-ù¶Í½îðŠt€CåŒê»R¤¡{òhG±ãÕýó      }   ¶  xœu‘¿jÜ@ÆëÝ§R¤‰0ý;Y�î.9|±8%�âšE'nÎ+!K�*µ«Ò81él0¸³J…¼‡Þ$³ÜÅÆiÄŒ¾o†�ß‡Ù²»Ö »[-#v~övnAp4yeAÚ”y«¼VZÀ§ùŠ;d>éÛ/ðûJõíç††®Í�:O=î’<y%àR4s!;t`™pï ×ÕŸû¾ýžEl”|#IUF,.Ë]1z0U…V e÷Só€,«x±uÀbÊ'ÔOûöÉ´‰6zkÖ…FILOÉŒð^è¨†×€�Sa�ð•úöü?&o¢4=7'pKfÝ\ö�?2Z.´äh3÷	¥Ó$…³Ù Êw‰Ô»f·ƒ“ùŽHÎ—ÅzSjhstÈó/§™ìî´/$ôÌ„ú¦±ÀÙ9º‡±¿u¢gÄä£ù‘jQn*±-4�C‹F€è“e 8ðÃ€ÚÿÄ	©dÿØŽrÄ–*«Š”N–zuß^)ºT€O9š±p?6à_×Î>€'Ü½ÇcòÎ½…�9æ†ŠÒÄ@ùÚ¶=‘=b}Ä9ÿÕñà›         Ê   xœ}�=‚@Fë�Sx�!ì"ˆ­ZZ›å'Æ]Aå&^@`b�%†{p×hE‹É4ß{™o(¡$Í“LÅHæE†’WXq•`tÌ”@ŸÑ³íJ2½õXû\�­ŽLVÝ£«• f´œø~ÓÞ”˜¼.ýóªŽQPCÀC£aÑ7uÓ‘rüò¶–à‡q$Sœ—è‰à[ùCêÛe®•«AQÏ„ø8¸nk˜¡P_g"–\‚?G±×ëÿ5w	; ÞOÔŽ      �      xœ‹Ñãââ Å ©      ’      xœ‹Ñãââ Å ©      ‚   »  xœÅYKSË^¿¢7©Â‹ú9íAF¶dlRwÓšiæz^ÑŒ„”]’e6¹u—ÙäQY¤²K²º,ñ!¿$§{$@¶”Â%H–¦OÏ÷õ9ç;çŒ‹ZãH¥Y„*ñLå1'E>²¿/GÖ;síQi	êø±(üâ°H0µË|d}÷ÆZŒ0Š	ÇÌEŒµ(kÏv˜`>·ªˆõžÔ«á}dlúã›ŸþŠF×ÿ*ù…õvrý§'Ä†ÝÿóÛXöÜr-n%¥
-±ÀA”¦“T�qå8�.°¤«BÔNÆH É0A{‹EÈ�]´€È+€å7˜åK@¦p’IyDY9.Ì#óQ†ºïÎ,.ÖâiŒ0eÌp¦fXR6à¼¨#³Ë*ZÚ"nn3Çq¹³Ú¸®Ëªµ³syyiÏ‹I=DvPd;Q6ˆÂ�ý·£îQ6%Ç£-@jU*«&ù�Tªfs\”:É²^s	uÌ%ÔcÉÎÝ¹SöÏ¾Æ¨8Ãb„ëx’4Xì2ƒ¿åû:ðmÎ,Çi€;+¸×oþÿrOö}GÕòÝûj~±Å�ú,QE–àqÂ«_cg40°>šïÑ;ý=òûhÛéìîPæuv_YË@\å¹f§Xú-)m~„üXÆ¿ì�ŸùQº¯Þo	`9M¦žSV5uß�çp	]À%´Í�"gš!gC…áÝ.ßàõLR C²(ËÎ2/$®Ç`|ƒ3ø[ ?ëvÏÀI°ÌòÑGîÛk6³Ò§¾Ë	b¼~`pkO8BlÖ±˜•Â½àh’0RZu«rFb*“:%'{l8"„–Ós¸™Q&ªc‰ŽÀRkr,‘DTõOˆDÛ;è€]÷üÍ+‹ºþ’àâ~pèÀg;Š(iqÙb®íPWHº1;ìT�±ªÊdAöB™“æBÍqÂq>‹+YM	q±�ã\à±ðOlQÛØ‚DP‰¤ƒ¸h_ „F";m¿ùhödïîìÍEè= ~ÀOçoa{Â§ÞfB¡ùéJù…@Õj€•«�–à)ìB9_‰¹/”¯¯¨í.«æ�“ØvX¯wk	§E}Û£ÜÝ˜’Ð.+Ë4‚bŠâVÉg¿
-9«V:%—d²â§SìÂRÓ0B]d¤mŸ¾Ýç¬×ÞiƒcžP–žÑ3ò.¯F*Kà !Ÿ²Xç“‹=:äŽùÄ˜äž¿Bæ‹¤êsÄuZ�BZ%@�¸’B‚Ñ³‘N0ÆCë�íùéòQ© ÚE¬;˜.‹tžA¦Q}Ê™Šq€gY1HÀ‘å%wçâgªjhåèŠ€l¡îî^È]Ë‘ÆMÂÿ™»ªixkÔ�‹µnèÁ÷ˆŠ££“ûÉïÑósBø¹Q8î¿d—ìC'	¥z ò7j|~ýO”Ï?DªÕÕñõ¿á3DOŒN¡€…Ö!„”Ä/täRÕA¼N‡>èå'ý×HÈ,CpŒK´ôE:I!=H'Q]ue{áKþ4ª*œ¿Vã‡µú§gˆå•¤í«å£8B»ËPv€¥ÙÁòqýpzRÙ"N‹SÛ>“þ¦qÍ$pÝ,‹°2ƒÅ-‘ VãÂFa/KÆžBtµ[¡î¸@–#aþÀdõŒT R«kH RbýéÎQU‘CXÅFxf™¸S™G8íÅ7W+‘¾Òƒ-,O,Kß#¬¨hq×¦DÐMª3¤Ü•XDª®ð0�f8›gÓ¯!{4¾€ÀïàU�O–mÇã>ùßÐ7.¡€ž�A3µÒ-½?~}�º»øã>Hà"y_&à©�P<Q—Q‚kJªµ3ß¡¹ŽNUiEïÃ:hßn®~“£î Z´\Ñ”¤^4ž&At×Ô=BZrh�ˆ-a.ò7oZýõM]åà4©£[fì¡yVwu=�€�î|žÔú<~‚miÀ…V1q™NŒ?Vð.ª«ÆyJ	Âèàpua¥>ì<ms¿¨gI :I³Û®%­3LX3qŽ£‰‘ÉUQÙ»þs	•ìÐûÞ.Zv2'ýS0´L#ôb‚ÏµJ‚@æqÑP©BìÁ¤
-T_àa2[Õ“øæ§+”ƒ„ü±¡ÐÛG‚žyO ˜ºÙÓÔð9Ðsn¹k˜Í2hrL¤`P|A¹˜\Õ�otÚM“&¿ãë¿—(¼þË…ÊòR/˜93ÀZ¬¥ÇH‹y-ÆmßqÜ�CŒKXÅ8‰ò�a„�QšðŠ’ÎU†ƒ×ÜLi+¬ÎŒz×ÆíŽ¶èQ²yòFe–GnÕþ[ø¦¦jKÊ9ÙìI�&àÜªTßšˆAOÖA>hŸ˜5»d�¦ø'ãuZ„ÙÔÔjS¼àýåyµ5( —?’øD47¨×¶Ç�Út¼·4XPà„-ç’G)ø-!ãƒÅæGN #šÕÍ³aá@"„j_µl‹ºÕD~§ÏL£¦¾
-yïñˆ§-*m‡»Þæ�•¸Da2„ò‰U%Ž†˜sbWM'áÐd´»Âáu³íéåèõ�^¾�ÝöùûýƒÛ'zO‰ Ñ¢Ôv\Ïõ7Ž ækAšLòº ”úÐ«$M‚"_Ûû÷ÌBä6‡½X	uWHò…#§ž>r!´1›ž8ý–„ª N¦‘¬#h�uÚ6vˆ!Aît4‡™2û‚§¼{�-]´mŸ‚mR,¦˜~JÂ@�#L¼ê+6Ÿÿpsõ#°�ÚöãÊüù‡›«ßÃûÞP=Ö0ÊÐq³"^O�ð�=ÊDj&œRÉ6gâB–¤jœEN3\	qQJqÊ›
-±*S'f=:9Åý½^‹ÓòÙÖSÄÉè¶Ï¡„lž4i¡îa0Uf*ÇŸ`H†$�qj†«zBÞ;k§“BÝ›c�-:6¶èlQÏØ"çöÿ*^b(ûÎÞÚÚú/âq©Š      ‰   .   xœ3äò÷q�vâ2‚°}ý]\ƒCüƒ¸Œ!Ž.¾ž~\1z\\\ "{€      „   þ   xœ]�1KÃ@†ç»_ñ.nR.‰×¸¶XÚÐŠ"¸åhÉ¥hª\EÜ,�AÅ=78´äþI/réÐõ{Ÿ÷ù>>�D&+ô¸�'ôBŸDEy'2‰³ÄèWÍ7ŸõÉÔÔ¿9Æq<ÆDª‚“Ajê¯Üæ¢BÀX‡1¶]ÑÀ�—é}�kîµXdê¿›„Œý;=qèDŠ,—-¸}³¤ß9±#½VsëÐkŒSÿ”è[Xí×Øí:ëP,Êbq`õŽ»¸¸M�~YÒ�DKñ S\‰r–‚ÍrwÀ)ýÜlOÛ·|ã¼Q¨¶35z5k›Í7Jé-�Û      †   5   xœ3ä4Ô+ÈKç2â4ÓÆœÆ`Ú„ÓL›rš‚i3N30mÎi¦-8-ÀtŒ >+!      ‹   á  xœ½ZÝ�ÓVÅÝ—´N'óÉ†v@%Ãˆ™mY		9Žk{Ç¾6‰=ÌTûPTUU…ªí¨ªê¢Fˆe”®*U}0Ëÿ‘ýKö|\;×IÑVÚ‡–`_ß{>~çœß9³’x×—êõÝ¹ùzuþ„ÿj�ÝŠZ®³|Ýl,Õw—ÍFÖT»NÏÿØ¿6ùõb£®¿Ž¥[i�†w|!_}ŠWû£Á¯Rx£ÁK)‚Ñ ï‹ {,a�†‡b'»á’á]áú£áSK$^Ö—®XÆ/žÃÚ$ÈîÃ[¬ÄqààšŸàU;ëG¢7>ÛðíçRt-ŽOÑó³Ç©ˆa‹Ã¿õÞ¨Qo˜Bf÷÷hËNv_zÂßð"é³)6�®ïôÄ)õŸ®‰-o4¼-’îëg£á=8Ö¦Ã¥�?Wõ²Ÿ|”ä¡-$<~
-ï•Œ‰/Y |1x˜ˆ�ÑðV±¨$'ä‘¯@°-Ð¬vM*9n¤£Ál8%$·�½ÀMï&xæ¡-¼l�ˆ0; e´DÒY{xœkãÇù�Ò%-|±­ÄËž„Âƒo>Maüy+e	KJÚÿ9„¿¼ÚÏh£Á‘m¼šÀ#ÜîÀ†å}LdÁ2ð :pÃÇw}á�(m|û^ì¦ðòFj�¬¯ö-òâ}	rÀk:X÷':
-ÌpM~ ‡î‰d4ü¥x�‚²÷�l…±s?²G¶é¡díÁ²wI�Ñðkø3ˆ%ÂNùoÒ{ýŽ†ÎŠÙÁèò7æ<±ªA7UÜð‹èD¹—AÔÃ;l—6 \tÐ6äøìðO•U´P¤‘¹¿ã¹£á—>9ö¿ŸüËõ³¾èŽCvyVêdä?¹‡G=AŸÛtÍ'ÅF»pxÌ1(BÓ�³l+Â_cÖõ»Í¯ùÏÍwqõŠQ«ø¿‚##Œ?ÛdÄÛ -óêÝZªOIJ ‰à²Pá_Ô2•&Oï…V7‰é[\Á› %ù}‹ÕMPÚùÕ>c”B˜Cò[›0±'¼ˆ�Dÿ‡' AM|€6+/³Á…Px<—ÒÒ/�%\‚En¿ìGJ] Na`Ü¼@	ÑÐd]#Wy4ü‚vaÁ§ç‘
-1šx)O¥„û'dFp7'ˆ@”»²&V½ìÞï°ÓsL C‹5QFÅØ�ÙHwˆ4O„Nè°è]ÊKbÕSf!P ò SÎ2ˆ7�k÷ÁñY?ÍŸ¸fã�EÒªÝH|\ €A¯U¶8)ìB‚v‘u86Ëñ‡É2y„¸áÚç‘<&õë!Æ†e•-7™·ÏV’
-æûj}¹jš•�*æ‰fÅEp:Òº^¯×ƒÈ�Æõ®¥²¡Je;�ì¹êu³¹°°»¸°4Y*ñõÒñ¯ÍšXûà:p	*üs" 0 bäBœpÜL NDË‘é5yNyÎ<ÃÔüN[€€ ù¥ädReZ	aÅqOàj7{�	1EÉ
-và×ú“¹‡Y©_–„—èËNt³'Ls,HãŒØ´0� ‹JDÉR¹¯´&n.aJà¢cv8�bœ¥TÙX \�¿J_ö+~¯„Í3¢EûŽ0/¿�Õ·ó‚6½¥.�ÑÅŒ…å&ýþ¨X[Ýˆžçœ¶;ˆ©”>„OD³Á î��1éNmè*­F2éF�Ø°¤°
-å
-®ÐÝÈíZaOX²#Þs¬$<ÖÄ¹±zÇºÏ¦À#Û£á?�c¼F¨ƒ<DB*¦Vi¼-ò�X”[‚ý:› Îl;H*Gaaã¿ˆ‹êŸªØà-zµ?o´>\}ÏY°Ðƒ.Ž§Œ€Ïþ,>*¯”¡¯:ð3m‹’öÃP	U’S‹î±9›bÍ·4}	N%´Ðh›P3¡ËfP�ûcö×7×L¬ö.£ùwg	®]ZHÍÜþÿ,¿M EÉ›‰G�qz€HÊ…þáÏÓTdG¶gPÀü@lwäðá:i{`lâ+&tÛa°çAqTË uá,vW­Cx°-V¼)ñœˆXq­Òo«–b6ˆ‘Œ É‘qÃ¤Zð´=€d*2°†D7•‡˜UBÈ{Ý—PãKñÄb¥çÝØ[¬W º7¸º»Žìy¾¬úalÙIµÑXž›Ÿ¯"¨6ëø1lR¯šÀà¿jƒÚßkë•dqêl1G¬3óÛ±€™mxÔõ¯Ÿ¥•Ô—Ï$%¯ÊŸ$.ÒI¢*®b‡ÜCK¢³ J‰�6ù‡X³€ÕÉbK±"ýÐàÜ¤²t¢QI¬và$Õ(Ž�á,øÆZœ«6®Ã›]Ó\hê�;Ž¬eiÔç–àÝüT÷ÿê+'eqŒ‚“ç-—*ïÙcdd‡’ pÕ·¢Ð—W/‹«M±þÞ*%¸§6ÿ!¹­GAÊu-6]B\ÑÐ:Ù�[O"ÂÀÂœhm ðî bÀ¿©gˆ@ÓO´vŽ%f¡õ¸sò¹íE¼b›%ã›ñ	§=�ªûª‰¶á`
-¿w¨e76Å¥ÕóÐ¾×\¨-,
-_Úˆ',B‰Æ ¡c;JÞú6l8Xf‡‰�8MÕ¦ëÐØP"h!º	¼v„Öðcq§8€\œ›ÒŠ;]Ë…×‹ÍÆÆÁg4òÈy¶Tm;(e	1EìX úÔ5*ú#­=�IyRïS`s	ÆnÁVÓðgN¿9LÃ±Í•^P³Q>6Ô¶BäˆBŸ~§ÚO-~1¶Aˆ>¶RÌµJ+÷ð}Þ©NÏ
-´Õ¾ÍÓš®(0†\G5²9 8Êø!lREÅÀÄÃt‡é›~#Ï×¶`¼·t„Ë„ÃtœOàÁlxÄ�r·j(\wµ&ÌÙlŠ±wœê­w±k‡~çGÕM*0b‹‘€´ÆÇNÂ(Èàs—V¸À<ÑP¹ú�sR'�ðd­r¹ú‘%{ì"ž
-�—76.‹•Å9RŒ§ú9ØæÈ
-)·÷qž'sÈ1y`'vÉB8a�1œï!†uÉðá~Bó¯[S¹Ý<1WÙ%Ï`ã*¿É*™çº9;Mú±ÙŒ»Úïyþ]Œ�è‘Z(› •.8Ê«1ô¦¯¶'*:(\h6Ñ�Ä)›r:¥v°ccé�úÒékò<E(G cÔW…Æ\ÚÅÙƒK%‚f†¸ä$=7êø®ü�I«ŠQüœÓé–c{Òÿ8BG)Âlq›¬R¹&0M4e©½ØMÉ;¤ª±l›F8Û£áä!Üå6Î•œ¨ôžùI4Þ¡a
-…›BJ—IéŒÉ§˜‰±~¯ô˜½_ô\SÇ/G)ðxHxÀC¾yÁœºõ±�Ó*'_ÍúÀ÷¾r¤8Õò;Òw½D¬u�½üýV“	ótz°
-ìñÔf*{NÂÕ*ë¨:AŒxžKíPØñ)ÐÆ›e ƒlŽÆ€Â–#XŒgÎ9,0ûP�Âgl?ž¡)¬Íç¸\ä(g#ÕRQÔ6ùRÄ�ªÅSãLöZ˜Çn4°QmMT^~î’™Ã›1rz<ŠçRPÜ	0Bw¡˜â„\¼ï¥{$?7ºpsNBé‹§k˜>h‹5´Ñ +–Jþ³`b�µaÓ(ë«çö¤OY† ÷9îñˆ'‹ÑYE[;E'¿L°ª+Ò!Þ³l§EÛ\¼6ˆÁ_H÷ò/Ñ˜„|`uNt_ë“½±éHžÂ²Ôd(;bŸÁ^T{™ù�7Ø /æjìl3™OÈv*œsÄêa�A¸ƒ¦Çë�}âõè¦›N[¥{5§Fì—;úy*t ¸9†®uŠ Ÿc±-] PXŸQ!mäjp—â4Ÿ(WtBsuMl2i€åœ¨”M´ÈÌ±r<(ôt®g²bVÏ6™r+]c!«Í*BR]§^Æê¾é,’éaöBsª ïs™›¥¢e%‰#Î–½M&Á¼GÃíÇ*!j& 3ŽÂœ¼\†'›�8¢`ºðÎW/Û³ë«6`]¨^7ç—w—–¦F¤Ú*õ2t,°Ãä²+Ž e\Ûë Fœš1B·‘ï€wÀ B6•U(€Hµ]Jéû]9ÀÇk›­<Ñ“›R<2&Ë»«²�yÄÐ7~Þ?Ðå\/RˆÚÉïÕ%!~Í×KÜBPûòyHb|Œˆq;?èÏ�†8Ú¹Oû{F™jÜ?/KI÷‰3ö¦vAÀXÂQ×pŸö´‹ÛJ5¸Ï›6eL±º�b¤íB¤mc4¨{^2å÷�ø«ç‰Kïžç¹Ð@I½�˜ú�Ž >•LN‘ÇwXJy¡�_¢bû>ä$Ð¯`ìl ÕŠ*~‘_ÍÜ)¥›j‡n‡T‹Ÿæ0(ôS33éb2Cóç—}ù\]‹- ÿhdLØ>ódY‰VÑ]�Ô)HÛ4äüª7ØýiíÞÒb]™®N8å®YX¡ŒnŽo-¬Ó §¬5Æ4}ÞÆÆ¯h5Ë‡Ñ@lgß‡
-ßÔ!Ü–ÄÚ9qe¥E…€mcµEà|Ë�Xç³—ã­É±ŠÔÓ]²W‚µC—–R®¸Ê)ó`Wa—‡@xóDT »Æ‰uÞ¢‡Žaö¨ûÍ„\mqDpPL¸™¦†Us:M¸DeÝõ 8_Y¿”Ý?3#¥LzÒ¾ØÎ×êõºW<2æ[4ƒóâCq* ¡Q¢‚vÜ^œžÎÕ•vºWµ°WoZ‰íU¹èT›8å2�¿S½•i&Õywæ¿
-™Xw£7­T]tGqDUüÄÆÙW�©M&¨õ£4ïÀMsKÌ¯1îà'–Hþ+…‹3çßY†$‘_ãp?gK†kÛé‚¢(V$ÜL�ÅP1¨XR>ŽíE“^¢Ê¥\Fñníj:'ÌˆC¢&V—!Åÿ bÁ÷F=1ÞJõ¡Í_ð%€!@Ñt‘î£	Ü8ˆT�¦ÁÍö¸®$”„¹�Ä
-Î”œãÁS_MæÂÊ3‘Ã:Õ‘AøÇ”ã)Ë�
-õ%ÑÚ¨U(c)ËK*NÄ1±ei{~Ïs¶Åß¬Žµc¼•î³ÂJ3ÂJë2¾!žœ\%¯Ÿ½îûyááÁt>ªâËç@�£:ÔÛPæj9ßJ@Êó~èÈžŸìá7u’o2wé1»°qÊ	²Ž[þGJWí²ò4�5(ÅÑ¼mìÙ(â¹oøßóE‹œOMr{ ´Xq­îM+Ð»€¼¿TÇ´|±auÄ|y÷©Æá¿H •[(�¸äõyÖßUdº\�´Øç¹ÐÌæ‘ã¤2_Õð()ŒTI¿Wj©‚O~¶òF ‘Ò*`»Ù¿inM†ås°*¢�›Ç™Ø�)B ZxN­V›ÎÏ×j'Nœø²Rõ‹      Œ      xœ34ã4ä24á4æ24²bô¸¸¸ ß«      Ž   /  xœ•Î=r‚@Æñz9…¥CxX¡~�D>u`Ò 8¬
-DWFÚœ$Èl“É=r“ÄÊÂÊyÊÿÌ3?PÈ¸+†ßï,]úóÁDŸ~�E³+ü÷üÉDã¿úÒÈ#–ñÓš¥FÝ N´ê˜>fE²É¥UY N: wõ@%ÃjÐZžîáúà6‹µEÂÂ­qHs˜ÐQ;�IƒQô0�xNáØ’½G4UÁ€L{ì¸�;d;¾ã ‚pëYª‘®)µ<žõcÙó(?R;á ä[çì{Õé÷—Á2'´hã,÷UïêÁè™?¯™ ½;<I^^v‹±ÜX³Ó`Ë#£±¡Ü»ÃÕ ä¾>¯NNrdfåUZÔÌ÷$ÄÙ.~{Šµ´©¯™—_áUá ûŒ     
