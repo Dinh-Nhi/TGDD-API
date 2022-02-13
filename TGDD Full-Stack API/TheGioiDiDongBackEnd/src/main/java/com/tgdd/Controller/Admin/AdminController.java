@@ -104,7 +104,7 @@ public ResponseEntity<?> uploadImage(@RequestParam("imageFile") MultipartFile fi
 	}
 
 }
-////ad-updated-nhieu-hinh-anh
+//ad-updated-nhieu-hinh-anh
 //	@PutMapping("/product-images/{id}")
 //	public ResponseEntity<?> setDetailsimages(@PathVariable(value = "id") Long Id,
 //			@RequestBody List<Detailsimages> images) {

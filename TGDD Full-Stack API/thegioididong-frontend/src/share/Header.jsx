@@ -97,11 +97,35 @@ class Header extends Component {
                 {currentUser ? (
 <ul><li class="nav-item dropdown">
 	        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Xin chào: {currentUser.username}</a>
-	        <div class="dropdown-menu dropdown-menu-right">
-         <div> <a href={"/info-user" }>Quản lý tài khoản</a></div>
-           <div><a href="" onClick={this.logOut}>Đăng xuất</a></div>
-	        </div>
-	      </li></ul>
+	        
+          
+          {(() =>
+                                         { if (currentUser.roles != 'ROLE_USER')
+                                          {
+                                               return (
+                           
+          <div class="dropdown-menu dropdown-menu-right">
+              <div> <a href={"/admin" }>ADMIN</a></div>
+          <div> <a href={"/info-user" }>Quản lý tài khoản</a></div>
+            <div><a href="" onClick={this.logOut}>Đăng xuất</a></div>
+           </div>
+                                               ) }
+                                               else 
+                                               {
+                                                    return (
+                                           
+          <div class="dropdown-menu dropdown-menu-right">
+          <div> <a href={"/info-user" }>Quản lý tài khoản</a></div>
+            <div><a href="" onClick={this.logOut}>Đăng xuất</a></div>
+           </div>
+                                                        
+                                                        ) } })()}
+
+	    
+      
+      
+      
+        </li></ul>
                   ) : (
                     <ul><li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="iconnews-ava-default"></i>Tài khoản</a>
