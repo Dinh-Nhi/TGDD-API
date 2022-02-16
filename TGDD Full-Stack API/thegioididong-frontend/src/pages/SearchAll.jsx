@@ -112,16 +112,7 @@ class SearchAll extends Component {
   
                   <hr />
   
-                  <p class="mb-3">
-                    <span class="tag"> <i class="fa fa-check"></i> Xác nhận </span>
-                    <span class="tag"> Mã: {products.productidLong} </span>
-                    <span class="tag"> Số điện thoại: {products.phoneString} </span>
-                    <span class="tag"> Chủ đầu tư: {products.customerString} </span>
-                    <span class="tag"> Vị trí: {products.positionString} </span>
-                    <span class="tag"> Số phòng: {products.roomInteger} phòng </span>
-                    <span class="tag"> Hướng: {products.directionString} </span>
-                    <span class="tag"> Diện tích: {products.areaString} m<sup>2</sup></span>
-                  </p>
+               
                   <a href={`lien-he`} class="btn btn-outline-primary "> <i class="fa fa-envelope"></i> Liên hệ nhà cung cấp </a>
   
                 </figcaption>
@@ -180,16 +171,7 @@ class SearchAll extends Component {
   
                   <hr />
   
-                  <p class="mb-3">
-                    <span class="tag"> <i class="fa fa-check"></i> Xác nhận </span>
-                    <span class="tag"> Mã: {products.productidLong} </span>
-                    <span class="tag"> Số điện thoại: {products.phoneString} </span>
-                    <span class="tag"> Chủ đầu tư: {products.customerString} </span>
-                    <span class="tag"> Vị trí: {products.positionString} </span>
-                    <span class="tag"> Số phòng: {products.roomInteger} phòng </span>
-                    <span class="tag"> Hướng: {products.directionString} </span>
-                    <span class="tag"> Diện tích: {products.areaString} m<sup>2</sup></span>
-                  </p>
+                
                   <a href={`lien-he`} class="btn btn-outline-primary "> <i class="fa fa-envelope"></i> Liên hệ nhà cung cấp </a>
   
                 </figcaption>
@@ -274,29 +256,63 @@ class SearchAll extends Component {
 												</div>
 											</li>
 
-											<li class="list-inline-item mr-3 dropdown">
-												<a href="#" class="dropdown-toggle" data-toggle="dropdown">Diện tích</a>
+
+		<li class="list-inline-item mr-3 dropdown">
+												<a href="#" class="dropdown-toggle" data-toggle="dropdown">Sản Phẩm Khác</a>
+												<div class="dropdown-menu p-3">
+
+											
+													<label class="form-check" checked={this.state.checked} onChange={this.handleChangeIPHONE}>
+														<input type="checkbox" class="form-check-input" name="IPHONE" />Laptop <b>({IPHONE})</b>
+													</label>
+
+                         
+													<label class="form-check" checked={this.state.checked} onChange={this.handleChangeOPPO}>
+														<input type="checkbox" class="form-check-input" name="OPPO" />Tablet <b>({OPPO})</b>
+													</label>
+
+										
+
+
+													<label class="form-check" checked={this.state.checked} onChange={this.handleChangenamXIAOMI}>
+														<input type="checkbox" class="form-check-input" name="XIAOMI" />Tai Nghe <b>({XIAOMI})</b>
+													</label>
+
+												
+													<label class="form-check" checked={this.state.checked} onChange={this.handleChangeREALME}>
+														<input type="checkbox" class="form-check-input" name="REALME" />Phụ Kiện <b>({REALME})</b>
+													</label>
+
+                      
+												
+												</div>
+											</li>
+											{/* <li class="list-inline-item mr-3 dropdown">
+												<a href="#" class="dropdown-toggle" data-toggle="dropdown">Sản Phẩm khác</a>
 												<div class="dropdown-menu p-3">
 													<b className="badge badge-pill badge-light float-right">{less50}</b>
 													<label class="form-check" checked={this.state.checked} onChange={this.filterless50}>
-														<input type="checkbox" class="form-check-input"  /><i className="fas fa-angle-left"></i> 50 m<sup>2</sup>
+														<input type="checkbox" class="form-check-input"  /><i className="fas fa-angle-left"></i>Laptop
 													</label>
 													<b className="badge badge-pill badge-light float-right">{than50}</b>
 													<label class="form-check" checked={this.state.checked} onChange={this.filterthan50}>
-														<input type="checkbox" class="form-check-input" /><i className="fas fa-angle-right"></i> 50 m<sup>2</sup>
+														<input type="checkbox" class="form-check-input" /><i className="fas fa-angle-right"></i>Tablet
 													</label>
 													<b className="badge badge-pill badge-light float-right">{less100}</b>
 													<label class="form-check" checked={this.state.checked} onChange={this.filterless100}>
-														<input type="checkbox" class="form-check-input"  /><i className="fas fa-angle-left"></i> 100 m<sup>2</sup>
+														<input type="checkbox" class="form-check-input"  /><i className="fas fa-angle-left"></i>Tai Nghe
 													</label>
 													<b className="badge badge-pill badge-light float-right">{than100}</b>
 													<label class="form-check" checked={this.state.checked} onChange={this.filterthan100}>
-														<input type="checkbox" class="form-check-input" /><i className="fas fa-angle-right"></i> 100 m<sup>2</sup>
+														<input type="checkbox" class="form-check-input" /><i className="fas fa-angle-right"></i>Phụ Kiện
 													</label>
 
 												</div>
 											</li>
-											<li class="list-inline-item mr-3">
+								 */}
+                
+                
+                			<li class="list-inline-item mr-3">
 												<div class="form-inline">
 													<label class="mr-2">Giá</label>
 													<input class=" " style={{ width: `100%` }, { cursor: `pointer` }} type="range" value={this.state.firstValue} min={this.state.minValue} max={this.state.maxValue} step={this.state.step} onChange={this.handlePrice.bind(this, "first")} />
